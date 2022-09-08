@@ -41,3 +41,19 @@ body {
    justify-content: center;
    align-items: center;
 }
+
+.center--column {
+   text-align: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+
+.margin-around--small {
+   margin: 1.2rem;
+}
+
+.margin-around--medium {
+   margin: 2rem;
+}
