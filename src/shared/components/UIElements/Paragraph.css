@@ -1,5 +1,10 @@
 .paragraph {
    color: white;
+   text-align: center;
+}
+
+.paragraph--color-primay {
+   color: #032538;
 }
 
 .paragraph--color-secondary {
@@ -7,7 +12,7 @@
 }
 
 .paragraph--shadow {
-   text-shadow: 0px 0px 3px #def320;
+   text-shadow: 0px 0px 5px #def320;
 }
 
 .paragraph--big-font {

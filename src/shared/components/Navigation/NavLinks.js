@@ -38,7 +38,7 @@ const NavLinks = (props) => {
    return (
       <ul className="nav-links">
          {navlinks.map((navlink) => (
-            <li>
+            <li key={navlink.text}>
                <NavLink to={navlink.to} exact>
                   {navlink.text}
                </NavLink>

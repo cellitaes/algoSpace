@@ -20,9 +20,9 @@ const App = () => {
             <PublicRoute path="/" exact>
                <MainPage />
             </PublicRoute>
-            <PrivateRoute path="/main">
+            {/* <PrivateRoute path="/main">
                <Routes />
-            </PrivateRoute>
+            </PrivateRoute> */}
          </Switch>
       </Router>
    );
