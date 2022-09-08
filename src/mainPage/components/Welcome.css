@@ -6,6 +6,7 @@
    color: white;
    width: 90%;
    background-color: rgba(0, 0, 0, 0.8);
+   box-shadow: 0, 0, 20px, rgba(0, 0, 0, 0.8);
    padding: 2rem 0.5rem;
    border-radius: 10px;
 }

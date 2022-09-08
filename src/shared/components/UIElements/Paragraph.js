@@ -7,7 +7,9 @@ const Paragraph = (props, children) => {
             props.secondary && 'paragraph--color-secondary'
          } ${props.shadow && 'paragraph--shadow'} ${
             props.bigFont && 'paragraph--big-font'
-         } ${props.bold && 'paragraph--font-bold'}`}
+         } ${props.bold && 'paragraph--font-bold'} ${
+            props.primary && 'paragraph--color-primay'
+         }`}
       >
          {props.children}
       </p>
