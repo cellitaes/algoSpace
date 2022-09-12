@@ -15,10 +15,7 @@
 }
 
 .categories__unorderd-list {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
+   display: grid;
    list-style: none;
    transform-style: preserve-3d;
    transition: all 1s linear;

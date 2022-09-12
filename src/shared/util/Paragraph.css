@@ -22,3 +22,19 @@
 .paragraph--font-bold {
    font-weight: bold;
 }
+
+.paragraph--padding-sx {
+   padding: 0.6rem;
+}
+
+.paragraph--color-white {
+   color: white;
+}
+
+.paragraph--justify {
+   text-align: justify;
+}
+
+.paragraph--align-left {
+   text-align: left;
+}
