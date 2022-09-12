@@ -1,3 +1,4 @@
+import About from '../components/About';
 import CategoriesList from '../components/CategoriesList';
 import LanguagesList from '../components/LanguagesList';
 import Sky from '../components/Sky';
@@ -10,6 +11,7 @@ const MainPage = () => {
          <Welcome />
          <CategoriesList />
          <LanguagesList />
+         <About />
       </>
    );
 };
