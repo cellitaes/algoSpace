@@ -1,26 +1,26 @@
 import Button from '../../shared/components/FormElements/Button';
-import Paragraph from '../../shared/components/UIElements/Paragraph';
 
 import './Welcome.css';
+import '../../shared/util/Paragraph.css';
 
 const Welcome = () => {
    return (
       <div className={`welcome center--column`}>
-         <Paragraph shadow={true}>
+         <p className="paragraph--shadow">
             Witaj przybyszu z odległej galaktyki...
-         </Paragraph>
+         </p>
          <div className="margin-around--small">
-            <Paragraph bigFont={true} secondary={true} bold={true}>
+            <p className="paragraph--shadow paragraph--big-font paragraph--color-secondary paragraph--font-bold">
                AlgoSpace
-            </Paragraph>
+            </p>
          </div>
-         <Paragraph shadow={true}>
+         <p className="paragraph--shadow">
             Jedyna w swoim rodzaju platforma e-learingowa.
-         </Paragraph>
-         <Paragraph shadow={true}>
+         </p>
+         <p className="paragraph--shadow">
             Lepsza od każdej innej znanej ci testerki, już teraz możesz mieć
             wszystko w jednym miejscu.
-         </Paragraph>
+         </p>
          <div className="margin-around--medium">
             <Button>Zarejestruj się</Button>
          </div>

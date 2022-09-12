@@ -1,4 +1,5 @@
 import CategoriesList from '../components/CategoriesList';
+import LanguagesList from '../components/LanguagesList';
 import Sky from '../components/Sky';
 import Welcome from '../components/Welcome';
 
@@ -8,6 +9,7 @@ const MainPage = () => {
          <Sky />
          <Welcome />
          <CategoriesList />
+         <LanguagesList />
       </>
    );
 };
