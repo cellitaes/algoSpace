@@ -1,0 +1,27 @@
+.about {
+   background-color: #eee;
+}
+
+.about__content {
+   width: 90%;
+   margin: 0 auto;
+   padding-top: 1.5rem;
+}
+
+.about__unordered-list {
+   display: grid;
+   list-style: none;
+}
+
+.list-item__content {
+   display: flex;
+   align-items: center;
+}
+
+.list-item__content img {
+   margin-right: 1rem;
+}
+
+.list-item__content p {
+   text-align: center;
+}
