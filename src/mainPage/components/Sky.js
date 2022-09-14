@@ -167,7 +167,7 @@ const Sky = () => {
       if (window.innerWidth >= 1024) {
          generateStars(500);
       } else {
-         generateStars(200);
+         generateStars(150);
       }
       draw(0);
    };
