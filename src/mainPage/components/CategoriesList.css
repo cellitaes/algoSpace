@@ -19,6 +19,7 @@
    list-style: none;
    transform-style: preserve-3d;
    transition: all 1s linear;
+   padding-bottom: 1.5rem;
 }
 
 .categories__list-item {

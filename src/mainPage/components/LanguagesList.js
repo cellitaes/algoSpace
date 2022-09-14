@@ -69,7 +69,13 @@ const LanguagesList = () => {
                         alt={lang.langName}
                      />
                      <p className="paragraph--color-white paragraph--align-left">
-                        <span className="highlight--secondary">
+                        <span
+                           className="highlight--secondary"
+                           style={{
+                              fontFamily: 'monospace',
+                              fontSize: '1.1rem',
+                           }}
+                        >
                            {lang.langName},{' '}
                         </span>
                         {lang.text}
