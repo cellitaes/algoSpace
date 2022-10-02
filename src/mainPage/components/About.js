@@ -1,4 +1,5 @@
 import './About.css';
+import '../../shared/util/Paragraph.css';
 
 import allInOne from '../../static/images/about/all-in-one.png';
 import checkAnswer from '../../static/images/about/checking-answer.png';
@@ -40,10 +41,10 @@ const About = () => {
          <div className="about__content">
             <ul className="about__unordered-list">
                {about.map((content) => (
-                  <li key={content.id} className="list-item">
+                  <li key={content.id} className="about__list-item">
                      <div className="list-item__content">
                         <img src={content.img} alt={content.text} />
-                        <p>{content.text}</p>
+                        <p className="paragraph--normal-font">{content.text}</p>
                      </div>
                   </li>
                ))}

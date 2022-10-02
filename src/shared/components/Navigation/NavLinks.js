@@ -5,14 +5,6 @@ import './NavLinks.css';
 
 const navlinks = [
    {
-      text: 'zarejestruj się',
-      to: '/register',
-   },
-   {
-      text: 'zaloguj się',
-      to: '/login',
-   },
-   {
       text: 'zadania',
       to: '/tasks',
    },
@@ -31,6 +23,10 @@ const navlinks = [
    {
       text: 'kategorie',
       to: '/categories',
+   },
+   {
+      text: 'zaloguj się',
+      to: '/login',
    },
 ];
 

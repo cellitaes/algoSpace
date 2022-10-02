@@ -69,7 +69,7 @@ const CategoriesList = () => {
       <div className="categories">
          <div className="categories__introduction">
             <h1>160 pytań obejmujących 15 kategorii.</h1>
-            <p className="paragraph--color-primay">
+            <p className="paragraph--color-primay categories__description--spacing paragraph--justify paragraph--normal-font">
                Jeśli chcesz dobrze wypaść na rozmowach o pracę, być dobrze
                zorientowanym we wszystkich typowych strukturach danych i
                popularnych metodach rozwiązywania problemów jest to miejsce
@@ -84,7 +84,7 @@ const CategoriesList = () => {
                         key={category.id}
                         className="categories__list-item center front face"
                      >
-                        <p className="paragraph--color-secondary">
+                        <p className="paragraph--color-secondary paragraph--normal-font">
                            {category.name}
                         </p>
                      </li>
@@ -92,7 +92,7 @@ const CategoriesList = () => {
                         key={`${category.id} ${category.name}`}
                         className="categories__list-item center back face ceneter"
                      >
-                        <p className="paragraph--color-secondary">
+                        <p className="paragraph--color-secondary paragraph--normal-font">
                            {category.name}
                         </p>
                      </li>

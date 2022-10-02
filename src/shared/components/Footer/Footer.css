@@ -1,5 +1,6 @@
 .footer {
    background-color: #031b29;
+   margin-top: auto;
 }
 
 .footer__content {
@@ -49,4 +50,45 @@
 .copyrights {
    font-size: 0.7rem;
    padding: 0.5rem 0;
+}
+
+@media (min-width: 568px) {
+   .footer__content h2 {
+      padding: 1rem 0;
+   }
+
+   .nomore {
+      padding: 1rem 0;
+   }
+}
+
+@media (min-width: 768px) {
+   .copyrights {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+   }
+}
+
+@media (min-width: 1024px) {
+   .nomore__list-item {
+      font-size: 1.1rem;
+   }
+}
+
+@media (min-width: 1336px) {
+   .copyrights {
+      font-size: 0.9rem;
+   }
+
+   .nomore {
+      padding-bottom: 2rem;
+   }
+
+   .footer-options__navlink {
+      font-size: 1.1rem;
+   }
+
+   .footer-options__navlink::after {
+      margin: 0 1rem;
+   }
 }
