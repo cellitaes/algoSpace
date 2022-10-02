@@ -53,7 +53,7 @@ const LanguagesList = () => {
             <h3 className="languages-container__title">
                Możliwość testowania kodu w aż 8 językach
             </h3>
-            <p className="paragraph--padding-sx paragraph--color-white paragraph--justify">
+            <p className="paragraph--padding-sx paragraph--color-white paragraph--justify paragraph--normal-font">
                Nie ma nic bardziej frustrującego niż otwarcie książki
                przygotowującej do rozmowy kwalifikacyjnej, tylko po to, by
                znaleźć kilka rozwiązań w języku programowania, którego nie
@@ -83,14 +83,14 @@ const LanguagesList = () => {
                   </li>
                ))}
             </ul>
-            <p className="paragraph--padding-sx paragraph--color-white paragraph--justify">
+            <p className="paragraph--padding-sx paragraph--color-white paragraph--justify paragraph--normal-font">
                W idealnym świecie przygotowujesz się do rozmów kwalifikacyjnych
                na temat kodowania, pisząc rozwiązania problemów w wybranym przez
                siebie języku, uzyskując w razie potrzeby kilka wskazówek,
                uruchamiając kod w oparciu o przypadki testowe i patrząc na
                rozwiązania po zakończeniu.
             </p>
-            <p className="paragraph--padding-sx paragraph--color-white paragraph--justify">
+            <p className="paragraph--padding-sx paragraph--color-white paragraph--justify paragraph--normal-font">
                Przekształciliśmy ten idealny świat w prawdziwy świat. Wybierz
                język. Przeczytaj monit. Napisz swoje rozwiązanie. Uruchom swój
                kod. Uzyskaj kilka wskazówek. Uruchom kod ponownie. Sprawdź dane

@@ -44,7 +44,9 @@ const MainNavigation = (props) => {
                   <img src={logo} alt={'logo'} />
                </Link>
             </h1>
-            <Button size={'xs'}>Zaloguj się</Button>
+            <div className="main-navigation__login-button">
+               <Button size={'xs'}>Zaloguj się</Button>
+            </div>
             <nav className="main-navigation__header-nav">
                <NavLinks />
             </nav>

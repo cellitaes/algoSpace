@@ -39,8 +39,22 @@
    height: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 430px) {
+   .main-navigation__logo {
+      width: 12rem;
+   }
+}
+
+@media (min-width: 1024px) {
    .main-navigation__menu-btn {
+      display: none;
+   }
+
+   .main-navigation__logo {
+      margin-left: 1rem;
+   }
+
+   .main-navigation__login-button {
       display: none;
    }
 

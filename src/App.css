@@ -4,4 +4,7 @@
 
 .layout-wrapper {
    margin-top: 4rem;
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
 }
