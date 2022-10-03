@@ -45,7 +45,9 @@ const MainNavigation = (props) => {
                </Link>
             </h1>
             <div className="main-navigation__login-button">
-               <Button size={'xs'}>Zaloguj się</Button>
+               <Button to="/login" size={'xs'}>
+                  Zaloguj się
+               </Button>
             </div>
             <nav className="main-navigation__header-nav">
                <NavLinks />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
+import Auth from './authPage/pages/Auth';
 import Footer from './shared/components/Footer/Footer';
 import MainPage from './mainPage/pages/MainPage';
 import PrivateRoute from './Routes/PrivateRoute';
@@ -16,9 +17,12 @@ const App = () => {
          <MainNavigation />
          <div className="layout-wrapper">
             <Switch>
-               {/* <PublicRoute path="/login" exact>
-               <Welcome />
-            </PublicRoute> */}
+               <PublicRoute path="/register" exact>
+                  <Auth />
+               </PublicRoute>
+               <PublicRoute path="/login" exact>
+                  <Auth />
+               </PublicRoute>
                <PublicRoute path="/" exact>
                   <MainPage />
                </PublicRoute>
