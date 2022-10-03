@@ -22,7 +22,7 @@ const Welcome = () => {
             wszystko w jednym miejscu.
          </p>
          <div className="margin-around--medium">
-            <Button>Zarejestruj się</Button>
+            <Button to="/register">Zarejestruj się</Button>
          </div>
       </div>
    );
