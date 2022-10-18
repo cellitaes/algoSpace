@@ -1,0 +1,145 @@
+.align-items-left {
+   text-align: left;
+}
+
+.category-name::first-letter {
+   text-transform: uppercase;
+}
+
+.category-name {
+   margin-bottom: 0.7rem;
+}
+
+.tasks-introduction {
+   margin-top: 0.7rem;
+}
+
+.category-tasks {
+   margin: 1rem 0;
+}
+
+.category-pagination {
+   list-style: none;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: #032538;
+   border-radius: 10px;
+   max-width: 500px;
+}
+
+.category-pagination li {
+   flex-basis: 40px;
+   margin: 0 0.25rem;
+   cursor: pointer;
+   color: #e8ff08;
+}
+
+.category-pagination .selected {
+   flex-basis: 2rem;
+   height: 2rem;
+   background-color: #e8ff08;
+   color: #032538;
+   font-weight: bold;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.category-pagination .previous {
+   flex-basis: 20%;
+   border-right: 2px solid #e8ff08;
+   margin-right: auto;
+}
+
+.category-pagination .next {
+   flex-basis: 20%;
+   border-left: 2px solid #e8ff08;
+   margin-left: auto;
+}
+
+.category-pagination .previous a i {
+   padding: 0.6rem 0.8rem;
+}
+
+.category-pagination .next a i {
+   padding: 0.6rem 0.8rem;
+}
+
+.task {
+   display: flex;
+   justify-content: space-between;
+   margin: 1rem 0;
+   min-height: 90px;
+   background-color: #032538;
+   border-radius: 10px;
+   cursor: pointer;
+   transition: 0.5s;
+}
+
+.task:hover,
+.task:active {
+   background-color: rgba(3, 37, 56, 0.85);
+}
+
+.task__name {
+   margin: 0 auto 0 0.5rem;
+   font-weight: bold;
+   font-family: monospace;
+   font-size: 1.2rem;
+   color: #e8ff08;
+}
+
+.task__difficulty {
+   writing-mode: vertical-rl;
+   text-orientation: mixed;
+   font-weight: bold;
+}
+
+.task__difficulty--easy {
+   background-color: rgb(27, 175, 27);
+}
+
+.task__difficulty--medium {
+   background-color: rgb(241, 164, 20);
+}
+
+.task__difficulty--hard {
+   background-color: #f34343;
+}
+
+@media (min-width: 568px) {
+   .category-pagination {
+      font-size: 1.5rem;
+      height: 40px;
+   }
+
+   .category-pagination .selected {
+      flex-basis: 2.5rem;
+   }
+
+   .task__name {
+      margin: 1rem auto 0 0.8rem;
+   }
+
+   .task__difficulty {
+      padding: 0 0.5rem;
+   }
+
+   .category-pagination .next,
+   .category-pagination .previous {
+      flex-basis: 5rem;
+   }
+}
+
+@media (min-width: 768px) {
+   .task__difficulty {
+      padding: 0.2rem 0.6rem;
+      font-size: 1.2rem;
+   }
+
+   hr {
+      height: 5px;
+      background-color: black;
+   }
+}

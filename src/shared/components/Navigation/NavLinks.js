@@ -5,37 +5,41 @@ import './NavLinks.css';
 
 const navlinks = [
    {
-      text: 'zadania',
-      to: '/tasks',
-   },
-   {
       text: 'ranking',
       to: '/ranks',
    },
    {
-      text: 'forum',
-      to: '/forum',
-   },
-   {
-      text: 'lekcje',
-      to: '/lessons',
-   },
-   {
       text: 'kategorie',
-      to: '/categories',
+      to: '/categories/all',
    },
    {
       text: 'zaloguj się',
       to: '/login',
    },
+   {
+      text: 'zarejestruj się',
+      to: '/register',
+   },
 ];
 
-const NavLinks = (props) => {
+const NavLinks = () => {
    return (
       <ul className="nav-links">
          {navlinks.map((navlink) => (
             <li key={navlink.text}>
-               <NavLink to={navlink.to} exact>
+               <NavLink
+                  to={navlink.to}
+                  isActive={(match, location) => {
+                     if (
+                        location.pathname.indexOf('categories') > -1 &&
+                        navlink.to === '/categories/all'
+                     ) {
+                        return true;
+                     } else {
+                        return navlink.to === location.pathname;
+                     }
+                  }}
+               >
                   {navlink.text}
                </NavLink>
             </li>
