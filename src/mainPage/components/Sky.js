@@ -1,12 +1,15 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import './Sky.css';
 
 const Sky = () => {
+   const location = useLocation();
+
    let canvas = null;
    let ctx = null;
-   const width = window.innerWidth;
-   const height = window.innerHeight;
+   let width = window.innerWidth;
+   let height = window.innerHeight;
    let lastConstellation = 0;
    let nextConstellation = Math.random() * 3000;
    let constellation = {
@@ -172,11 +175,23 @@ const Sky = () => {
       draw(0);
    };
 
-   useEffect(() => {
+   const handleResize = () => {
       const canva = document.querySelector('canvas');
       canvas = canva;
+      width = window.innerWidth;
+      height = window.innerHeight;
       ctx = canvas.getContext('2d');
       run();
+   };
+
+   useEffect(() => {
+      handleResize();
+   }, [location]);
+
+   useEffect(() => {
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
    }, []);
 
    return (
