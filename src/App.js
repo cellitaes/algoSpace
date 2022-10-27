@@ -5,10 +5,11 @@ import Auth from './authPage/pages/Auth';
 import Categories from './categoriesPage/pages/Categories';
 import Footer from './shared/components/Footer/Footer';
 import MainPage from './mainPage/pages/MainPage';
+import NotFound from './shared/util/NotFound';
 import PrivateRoute from './Routes/PrivateRoute';
 import PublicRoute from './Routes/PublicRoute';
 import Routes from './Routes';
-import Tasks from './tasksPage/pages/Tasks';
+import Task from './taskPage/pages/Task';
 
 import './App.css';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
@@ -28,15 +29,13 @@ const App = () => {
                <PublicRoute path="/login" exact>
                   <Auth />
                </PublicRoute>
-               <PublicRoute path="/tasks" exact>
-                  <Tasks />
-               </PublicRoute>
                <PublicRoute path="/categories/:category" exact>
                   <Categories />
                </PublicRoute>
-               {/* <PrivateRoute path="/main">
-               <Routes />
-            </PrivateRoute> */}
+               <PublicRoute path="/task/:taskId" exact>
+                  <Task />
+               </PublicRoute>
+               <NotFound />
             </Switch>
             <Footer />
          </div>

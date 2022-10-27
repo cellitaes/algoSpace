@@ -1,0 +1,44 @@
+.task-explanation {
+   display: flex;
+   flex-direction: column;
+   padding: 8px 16px 8px 8px;
+   font-family: Arial;
+   font-size: 16px;
+   line-height: 28px;
+   background-color: #eeeeee;
+}
+
+.task-explanation .example {
+   padding: 8px;
+   margin-bottom: 6px;
+   border: 2px solid #afafce;
+   border-radius: 10px;
+   font-size: 14px;
+}
+
+.task-explanation .example-code {
+   font-weight: 700;
+   font-style: italic;
+}
+
+.task-explanation .assumptions {
+   padding: 8px;
+   margin-top: 40px;
+   border: 2px solid #afafce;
+   border-radius: 10px;
+   font-size: 14px;
+}
+
+.task-explanation .assumptions ul {
+   margin: 0;
+   margin-left: 10px;
+}
+
+.task-explanation .task-footer {
+   display: flex;
+   justify-content: space-between;
+   margin-top: 20px;
+   font-style: italic;
+   font-size: 10px;
+   font-weight: 100;
+}
