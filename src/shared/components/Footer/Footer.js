@@ -66,7 +66,7 @@ const footerOptions = [
 
 const Footer = () => {
    return (
-      <footer className="footer">
+      <footer className="main-footer">
          <div className="footer__content">
             <h2>Najlepszy sposób na naukę do rozmowy o pracę</h2>
             <ul className="nomore">

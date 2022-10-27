@@ -35,6 +35,10 @@
    color: #e8ff08;
 }
 
+.category-pagination li a {
+   padding: 5px 10px;
+}
+
 .category-pagination .selected {
    flex-basis: 2rem;
    height: 2rem;
@@ -75,6 +79,8 @@
    border-radius: 10px;
    cursor: pointer;
    transition: 0.5s;
+   text-decoration: none;
+   color: black;
 }
 
 .task:hover,
@@ -88,6 +94,9 @@
    font-family: monospace;
    font-size: 1.2rem;
    color: #e8ff08;
+   display: flex;
+   flex-grow: 1;
+   padding-top: 0.4rem;
 }
 
 .task__difficulty {
@@ -101,11 +110,18 @@
 }
 
 .task__difficulty--medium {
-   background-color: rgb(241, 164, 20);
+   background-color: #ffc107;
 }
 
 .task__difficulty--hard {
-   background-color: #f34343;
+   background-color: #dc3545;
+}
+
+.task__done {
+   font-size: 1.6rem;
+   margin: auto 0.8rem;
+   color: #1aee4c;
+   align-items: center;
 }
 
 @media (min-width: 568px) {
@@ -119,7 +135,13 @@
    }
 
    .task__name {
-      margin: 1rem auto 0 0.8rem;
+      margin: 0.8rem auto 0 0.8rem;
+      padding-top: 0;
+   }
+
+   .task__done {
+      margin-right: 1rem;
+      font-size: 1.8rem;
    }
 
    .task__difficulty {
@@ -141,5 +163,13 @@
    hr {
       height: 5px;
       background-color: black;
+   }
+
+   .task__name {
+      font-size: 1.4rem;
+   }
+
+   .task__done {
+      font-size: 2rem;
    }
 }
