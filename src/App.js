@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import Auth from './authPage/pages/Auth';
 import Categories from './categoriesPage/pages/Categories';
+import ConfirmChoice from './taskPage/components/ConfirmChoice';
 import Footer from './shared/components/Footer/Footer';
 import MainPage from './mainPage/pages/MainPage';
-import NotFound from './shared/util/NotFound';
+import NotFound from './shared/util/pages/NotFound';
 import PrivateRoute from './Routes/PrivateRoute';
 import PublicRoute from './Routes/PublicRoute';
 import Routes from './Routes';
@@ -31,6 +32,9 @@ const App = () => {
                </PublicRoute>
                <PublicRoute path="/categories/:category" exact>
                   <Categories />
+               </PublicRoute>
+               <PublicRoute path="/start/task/:taskId" exact>
+                  <ConfirmChoice />
                </PublicRoute>
                <PublicRoute path="/task/:taskId" exact>
                   <Task />

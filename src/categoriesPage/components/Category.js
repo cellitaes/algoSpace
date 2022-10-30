@@ -78,7 +78,7 @@ const Category = () => {
             />
             {currentItems?.map((task) => (
                <div key={task.id}>
-                  <NavLink className="task" to={`/task/${task.id}`}>
+                  <NavLink className="task" to={`/start/task/${task.id}`}>
                      <div
                         className={`task__difficulty task__difficulty--${task.difficulty.id.toLowerCase()}`}
                      >

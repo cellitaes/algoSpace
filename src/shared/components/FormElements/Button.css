@@ -9,6 +9,7 @@
    margin-right: 1rem;
    text-decoration: none;
    display: inline-block;
+   transition: 0.3s;
 }
 
 .button:focus {
@@ -16,20 +17,34 @@
 }
 
 .button:hover,
-.button:active {
-   background: #def320;
-   border-color: #def320;
+.button:active,
+.button.active {
+   background: #032538;
+   border-color: #e8ff08;
+   color: #e8ff08;
 }
 
 .button--inverse {
-   background: transparent;
+   background: #032538;
    color: #e8ff08;
+}
+
+.button--success {
+   background: #28a745;
+   border-color: #24a241;
+   color: #032538;
+}
+
+.button--success:hover,
+.button--success:active {
+   background: #2ed755;
+   border-color: #20d54a;
 }
 
 .button--inverse:hover,
 .button--inverse:active {
    color: #032538;
-   background: #ff0055;
+   background: #def320;
 }
 
 .button--danger {
@@ -58,7 +73,7 @@
    padding: 0.3rem 0.6rem;
 }
 
-.button--small {
+.button--sm {
    font-size: 0.8rem;
 }
 

@@ -1,0 +1,12 @@
+version: '1'
+services:
+   frontend:
+      build: .
+      ports:
+         - '3000:3000'
+      stdin_open: true
+      tty: true
+      restart: always
+      volumes:
+         - './src:/app/src'
+         - '/app/node_modules'

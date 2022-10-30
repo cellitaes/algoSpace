@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
 import './Footer.css';
-import '../../util/Paragraph.css';
+import '../../util/css/Paragraph.css';
 
 const noMore = [
    {

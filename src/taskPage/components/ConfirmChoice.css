@@ -1,0 +1,77 @@
+.confirmation-page {
+   background-color: #eee;
+   min-height: 90vh;
+}
+
+.confirmation-page__layout {
+   position: relative;
+   max-width: 1024px;
+}
+
+.confirmation-page__goback-btn button {
+   position: absolute;
+   left: 0.5rem;
+   top: 1rem;
+}
+
+.confirmation-page__goback-btn span {
+   margin-left: 0.5rem;
+}
+
+.confirmation-page__header {
+   margin-top: 4rem;
+   width: 90%;
+}
+
+.confirmation-page__header .app-name {
+   margin-bottom: 1rem;
+}
+
+.task-summary p {
+   width: 100%;
+   text-align: left;
+   margin-bottom: 0.3rem;
+   padding-left: 0.5rem;
+}
+
+.task-summary p span {
+   font-weight: bold;
+}
+
+.language-select {
+   width: 60%;
+   margin: 0 auto 1rem;
+   max-width: 300px;
+}
+
+.language-select ~ a {
+   margin: 0;
+   margin-bottom: 1rem;
+}
+
+@media (min-width: 1024px) {
+   .confirmation-page__layout {
+      min-width: 900px;
+   }
+
+   .confirmation-page__goback-btn button {
+      font-size: 1.3rem;
+   }
+
+   .task-summary p {
+      font-size: 1.4rem;
+   }
+
+   .confirmation-page__header .app-name {
+      margin-bottom: 2rem;
+   }
+
+   .language-select {
+      font-size: 1.4rem;
+   }
+
+   .language-select ~ a {
+      font-size: 1.3rem;
+      margin-top: 1rem;
+   }
+}

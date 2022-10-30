@@ -1,0 +1,30 @@
+.toolbar {
+   background-color: #032538;
+   padding: 0.8rem 1rem;
+}
+
+.toolbar p {
+   color: white;
+   font-weight: bold;
+   margin-bottom: 0.5rem;
+   font-size: 1.2rem;
+}
+
+.toolbar__button button {
+   font-size: 0.7rem;
+}
+
+.toolbar__tabs {
+   padding: 0.5rem 0.2rem;
+   display: flex;
+   justify-content: space-between;
+}
+
+.toolbar__tabs button {
+   flex-basis: 48%;
+   font-weight: bold;
+}
+
+.toolbar__button--txtAlignRight {
+   text-align: right;
+}

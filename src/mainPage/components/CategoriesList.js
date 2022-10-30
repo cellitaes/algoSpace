@@ -1,5 +1,5 @@
 import './CategoriesList.css';
-import '../../shared/util/Paragraph.css';
+import '../../shared/util/css/Paragraph.css';
 import { useEffect, useState } from 'react';
 import { useHttpClient } from '../../shared/hooks/httpHook';
 
