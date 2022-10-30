@@ -68,3 +68,9 @@
       margin-top: 1rem;
    }
 }
+
+@media (min-width: 1336px) {
+   .categories-container {
+      height: 90vh;
+   }
+}

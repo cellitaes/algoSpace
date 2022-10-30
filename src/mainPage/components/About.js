@@ -1,5 +1,5 @@
 import './About.css';
-import '../../shared/util/Paragraph.css';
+import '../../shared/util/css/Paragraph.css';
 
 import allInOne from '../../static/images/about/all-in-one.png';
 import checkAnswer from '../../static/images/about/checking-answer.png';

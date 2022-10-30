@@ -1,7 +1,7 @@
 import Button from '../../shared/components/FormElements/Button';
 
 import './Welcome.css';
-import '../../shared/util/Paragraph.css';
+import '../../shared/util/css/Paragraph.css';
 
 const Welcome = () => {
    return (

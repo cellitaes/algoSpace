@@ -11,6 +11,10 @@
    color: #def320;
 }
 
+.paragraph--color-danger {
+   color: #830000;
+}
+
 .paragraph--shadow {
    text-shadow: 0px 0px 5px #def320;
 }

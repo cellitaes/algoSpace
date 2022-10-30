@@ -8,7 +8,7 @@ import swift from '../../static/images/languages/swift.png';
 import typescript from '../../static/images/languages/typescript.png';
 
 import './LanguagesList.css';
-import '../../shared/util/Paragraph.css';
+import '../../shared/util/css/Paragraph.css';
 
 const languagesList = [
    {

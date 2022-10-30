@@ -1,0 +1,58 @@
+.editor-container {
+   position: relative;
+}
+
+.none-edit {
+   position: relative;
+}
+
+.none-edit::after {
+   content: '';
+   display: block;
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.75);
+   z-index: 2;
+}
+
+.none-edit button {
+   position: absolute;
+   top: 1rem;
+   right: 0;
+   z-index: 3;
+   font-weight: bold;
+}
+
+.none-edit button i {
+   padding-right: 8px;
+}
+
+.editor {
+   position: fixed;
+   top: 6rem;
+   left: 0;
+}
+
+.minimalize-editor {
+   position: fixed;
+   z-index: 2;
+   top: 4rem;
+   left: 0;
+   width: 100%;
+   background-color: #031b29;
+   display: flex;
+   justify-content: right;
+   align-items: center;
+   height: 2rem;
+}
+
+.minimalize-editor button {
+   margin-right: 1rem;
+}
+
+.minimalize-editor button i {
+   font-size: 0.8rem;
+}
