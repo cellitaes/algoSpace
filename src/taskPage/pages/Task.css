@@ -66,6 +66,56 @@
    .task-explanation .footer {
       font-size: 1rem;
    }
+
+   .task-container {
+      display: flex;
+      flex-direction: row;
+   }
+
+   .task-container__introduction {
+      flex-basis: 40%;
+      overflow-y: scroll;
+      height: 93vh;
+   }
+
+   .task-container__code-editor {
+      flex-basis: 60%;
+      height: 93vh;
+   }
+
+   .task-container {
+      height: 93vh;
+   }
+
+   .slider-task__divider {
+      position: absolute;
+      width: 3px;
+      height: 100vh;
+      top: 0;
+      left: 40%;
+      transform: translateX(-50%);
+      background: #032538;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+   }
+
+   .slider-task__handle {
+      border-radius: 50%;
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.75);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      cursor: col-resize;
+   }
+
+   .slider-task__handle i {
+      position: static;
+   }
 }
 
 @media (min-width: 1336px) {

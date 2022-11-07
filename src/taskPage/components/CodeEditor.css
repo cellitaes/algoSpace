@@ -26,6 +26,16 @@
    font-weight: bold;
 }
 
+.flex-column {
+   display: flex;
+   flex-direction: column;
+}
+
+.form-spacing {
+   font-weight: bold;
+   margin-bottom: 0.5rem;
+}
+
 .none-edit button i {
    padding-right: 8px;
 }
@@ -34,6 +44,7 @@
    position: fixed;
    top: 6rem;
    left: 0;
+   width: 100%;
 }
 
 .minimalize-editor {
@@ -55,4 +66,54 @@
 
 .minimalize-editor button i {
    font-size: 0.8rem;
+}
+
+.display-none {
+   display: 'none';
+}
+
+.code-editor-container {
+   position: relative;
+}
+
+@media (min-width: 568px) {
+   .minimalize-editor {
+      height: 3rem;
+   }
+
+   .editor {
+      top: 7rem;
+   }
+}
+
+@media (min-width: 1024px) {
+   .editor-container {
+      height: 93vh;
+   }
+
+   .none-edit::after {
+      display: none;
+   }
+
+   .none-edit button {
+      display: none;
+   }
+
+   .minimalize-editor.display-none {
+      position: static;
+      display: flex;
+      background-color: #032538;
+   }
+
+   .minimalize-editor__settings button:nth-child(2) {
+      display: none;
+   }
+
+   .code-editor {
+      height: 100%;
+   }
+
+   .code-editor-container section {
+      height: 88vh !important;
+   }
 }

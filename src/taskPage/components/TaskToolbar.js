@@ -4,6 +4,7 @@ import Select from 'react-select';
 import Button from '../../shared/components/FormElements/Button';
 import ConfirmationModal from '../../shared/components/Modals/ConfirmationModal';
 import { useModal } from '../../shared/hooks/modalHook';
+import { useHttpClient } from '../../shared/hooks/httpHook';
 
 import { customStyles } from '../components/SelectCustomStyles';
 import './TaskToolbar.css';
@@ -18,11 +19,41 @@ const TaskToolbar = ({
    availableLanguages,
    handleLanguageChange,
    descriptionMode,
-   setDescriptionMode,
+   changeDescriptionMode,
+   displayNone,
+   code,
 }) => {
    const history = useHistory();
 
    const { open, openModal, closeModal } = useModal();
+   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+   const checkSolution = async () => {
+      const body = {
+         submissionDate: new Date().toISOString(),
+         content: code,
+         language: 'JAVA',
+         taskId: 2,
+         solverEmail: 'pelo',
+      };
+
+      // const data = await sendRequest(
+      //    'http://localhost:8080/solution/check',
+      //    'POST',
+      //    JSON.stringify(body)
+      // );
+
+      fetch('http://localhost:8080/solution/check', {
+         body: JSON.stringify(body),
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+      })
+         .then((res) => res.json())
+         .then((res) => console.log(res))
+         .catch((e) => console.log(e));
+
+      // console.log(data);
+   };
 
    return (
       <>
@@ -33,35 +64,17 @@ const TaskToolbar = ({
             onCancel={closeModal}
             onClick={() => history.go(-2)}
          />
-         <div className="toolbar">
-            <div className="toolbar__goback">
+         <div className={`toolbar ${displayNone && 'display-none'}`}>
+            <div className="toolbar__options">
                <Button size="xs" onClick={openModal}>
                   <i class="fa-solid fa-left-long"></i>
                </Button>
-            </div>
-            <div className="toolbar__button toolbar__button--txtAlignRight">
-               <Button size="xs" inverse>
+               <Button size="xs" inverse onClick={checkSolution}>
                   <i class="fa-solid fa-check"></i>
                   {` Sprawdź rozwiązanie`}
                </Button>
             </div>
-            <div className="toolbar__tabs">
-               <Button
-                  size="xs"
-                  active={descriptionMode}
-                  onClick={() => setDescriptionMode(true)}
-               >
-                  Opis zadania
-               </Button>
-               <Button
-                  size="xs"
-                  active={!descriptionMode}
-                  onClick={() => setDescriptionMode(false)}
-               >
-                  Edytor kodu
-               </Button>
-            </div>
-            <div>
+            <div className="select-language">
                <p className="toolbar__title">{title}</p>
                <div className="toolbar__select">
                   <Select
@@ -75,6 +88,22 @@ const TaskToolbar = ({
                      onChange={handleLanguageChange}
                   />
                </div>
+            </div>
+            <div className="toolbar__tabs">
+               <Button
+                  size="xs"
+                  active={descriptionMode}
+                  onClick={() => changeDescriptionMode(true)}
+               >
+                  Opis zadania
+               </Button>
+               <Button
+                  size="xs"
+                  active={!descriptionMode}
+                  onClick={() => changeDescriptionMode(false)}
+               >
+                  Edytor kodu
+               </Button>
             </div>
          </div>
       </>
