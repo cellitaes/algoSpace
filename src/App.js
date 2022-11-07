@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import Auth from './authPage/pages/Auth';
 import Categories from './categoriesPage/pages/Categories';
-import ConfirmChoice from './taskPage/components/ConfirmChoice';
+import ConfirmChoice from './taskPage/pages/ConfirmChoice';
 import Footer from './shared/components/Footer/Footer';
 import MainPage from './mainPage/pages/MainPage';
 import NotFound from './shared/util/pages/NotFound';

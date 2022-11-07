@@ -9,9 +9,9 @@ import {
 import 'react-accessible-accordion/dist/fancy-example.css';
 import './Hints.css';
 
-const Hints = ({ hints }) => {
+const Hints = ({ hints, displayNone }) => {
    return (
-      <div className="hints">
+      <div className={`hints ${displayNone && 'display-none'}`}>
          <Accordion>
             {hints?.map((hint, idx) => (
                <AccordionItem key={idx}>

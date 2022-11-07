@@ -1,3 +1,7 @@
 .hints {
    margin-bottom: 1rem;
 }
+
+.display-none {
+   display: none;
+}
