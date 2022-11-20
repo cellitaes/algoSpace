@@ -6,11 +6,11 @@ import '../../util/css/Paragraph.css';
 const noMore = [
    {
       textId: 1,
-      text: 'Nigdy więcej wiadomości, które zostają zignorowane',
+      text: 'Nigdy więcej wiadomości, które zostają zignorowane.',
    },
    {
       textId: 2,
-      text: 'Nigdy więcej zimnych e-maili, które nigdzie nie trafiają',
+      text: 'Nigdy więcej nieprzespanych i zarawanych nocy.',
    },
    {
       textId: 3,
@@ -18,11 +18,11 @@ const noMore = [
    },
    {
       textId: 4,
-      text: 'Nigdy więcej programów polecających, które nie działają.',
+      text: 'Nigdy więcej uczucia bezradności w trakcie rozmowy rekrutacyjnej.',
    },
    {
       textId: 5,
-      text: 'Nigdy więcej agencj rekrutacyjnych, które kosztują fortunę.',
+      text: 'Nigdy więcej zadań kwalifikacyjnych, których nie potrafisz rozwiązań.',
    },
 ];
 

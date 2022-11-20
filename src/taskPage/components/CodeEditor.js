@@ -1,21 +1,19 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Editor from '@monaco-editor/react';
 import monacoThemes from 'monaco-themes/themes/themelist';
 import Select from 'react-select';
 
-import {
-   RAPID_API_HOST,
-   RAPID_API_KEY,
-   APP_APPI_SUBMISSION_URL,
-} from '../../config';
-import { apiLanguages } from '../../shared/util/apiLanguages.js';
-
 import Button from '../../shared/components/FormElements/Button';
 import ConfirmationModal from '../../shared/components/Modals/ConfirmationModal';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Output from './Output';
 
+import { AuthContext } from '../../shared/context/AuthContext';
 import { customStyles } from '../components/SelectCustomStyles';
+import { URL } from '../../config';
+
 import './CodeEditor.css';
 
 const CodeEditor = ({
@@ -32,7 +30,9 @@ const CodeEditor = ({
    const history = useHistory();
    const [openQuitModal, setOpenQuitModal] = useState(false);
    const [openSettings, setOpenSettings] = useState(false);
-   const [codeExecutionRes, setCodeExecutionRes] = useState({});
+   const [codeExecutionRes, setCodeExecutionRes] = useState('');
+
+   const { token } = useContext(AuthContext);
 
    const quitHeader = 'Czy na pewno chcesz wyjść?';
    const quitContent =
@@ -57,42 +57,26 @@ const CodeEditor = ({
       </div>
    );
 
-   const language_id = apiLanguages.find(
-      (lang) => lang.value === language.value
-   ).id;
-
-   const checkCode = async (token) => {
-      const options = {
-         method: 'GET',
-         headers: {
-            'X-RapidAPI-Key': RAPID_API_KEY,
-            'X-RapidAPI-Host': RAPID_API_HOST,
-         },
+   const handleCodeCompile = async () => {
+      setCodeExecutionRes('');
+      const url = `${URL}/syntax/check`;
+      const method = 'POST';
+      const body = JSON.stringify({
+         language: language.value.toUpperCase(),
+         code: code,
+      });
+      const headers = {
+         'Content-Type': 'application/json',
+         Authorization: `Bearer ${token}`,
       };
 
-      await fetch(`${APP_APPI_SUBMISSION_URL}/${token}`, options)
-         .then((res) => res.json())
+      await fetch(url, {
+         method,
+         body,
+         headers,
+      })
+         .then((res) => res.text())
          .then((res) => setCodeExecutionRes(res));
-   };
-
-   const sendCode = async () => {
-      const options = {
-         method: 'POST',
-         headers: {
-            'content-type': 'application/json',
-            'Content-Type': 'application/json',
-            'X-RapidAPI-Key': RAPID_API_KEY,
-            'X-RapidAPI-Host': RAPID_API_HOST,
-         },
-         body: JSON.stringify({
-            language_id: language_id,
-            source_code: code,
-         }),
-      };
-
-      await fetch(APP_APPI_SUBMISSION_URL, options)
-         .then((res) => res.json())
-         .then((token) => checkCode(token.token));
    };
 
    return (
@@ -137,8 +121,8 @@ const CodeEditor = ({
                   </Button>
                </div>
                {showOutput && (
-                  <Button size="xs" onClick={sendCode}>
-                     Compile and execute
+                  <Button size="xs" onClick={handleCodeCompile}>
+                     Compile code
                   </Button>
                )}
             </div>
@@ -157,7 +141,7 @@ const CodeEditor = ({
                      <Editor
                         className="code-editor"
                         theme={theme.value}
-                        height={'93vh'}
+                        height={'92vh'}
                         code={code}
                         language={language?.value}
                         defaultValue={code}

@@ -1,9 +1,14 @@
 import Button from '../../shared/components/FormElements/Button';
+import { useContext } from 'react';
+
+import { AuthContext } from '../../shared/context/AuthContext';
 
 import './Welcome.css';
 import '../../shared/util/css/Paragraph.css';
 
 const Welcome = () => {
+   const { isLoggedIn } = useContext(AuthContext);
+
    return (
       <div className={`welcome center--column`}>
          <p className="paragraph--shadow paragraph--normal-font">
@@ -21,9 +26,11 @@ const Welcome = () => {
             Lepsza od każdej innej znanej ci testerki, już teraz możesz mieć
             wszystko w jednym miejscu.
          </p>
-         <div className="margin-around--medium">
-            <Button to="/register">Zarejestruj się</Button>
-         </div>
+         {!isLoggedIn && (
+            <div className="margin-around--medium">
+               <Button to="/register">Zarejestruj się</Button>
+            </div>
+         )}
       </div>
    );
 };

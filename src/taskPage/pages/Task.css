@@ -37,6 +37,10 @@
    margin-left: 1.5rem;
 }
 
+.slider-task__divider {
+   display: none;
+}
+
 .task-explanation .footer {
    display: flex;
    justify-content: space-between;
@@ -74,17 +78,17 @@
 
    .task-container__introduction {
       flex-basis: 40%;
-      overflow-y: scroll;
-      height: 93vh;
+      overflow-y: auto;
+      height: 92vh;
    }
 
    .task-container__code-editor {
       flex-basis: 60%;
-      height: 93vh;
+      height: 92vh;
    }
 
    .task-container {
-      height: 93vh;
+      height: 92vh;
    }
 
    .slider-task__divider {

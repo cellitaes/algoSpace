@@ -9,20 +9,27 @@ export const useHttpClient = () => {
          setIsLoading(true);
 
          try {
-            const response = await fetch(url, {
+            let response = await fetch(url, {
                method,
                body,
                headers,
             });
 
-            const responseData = await response.json();
+            let responseData = {};
+            try {
+               responseData = await response.json();
+            } catch (err) {}
 
             if (!response.ok) {
                throw new Error(responseData.message);
             }
 
             setIsLoading(false);
-            return responseData;
+            return {
+               data: responseData,
+               status: response.status,
+               ok: response.ok,
+            };
          } catch (err) {
             setError(err.message);
             setIsLoading(false);

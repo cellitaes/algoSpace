@@ -11,7 +11,7 @@ const Output = ({ codeExecutionRes }) => {
    const heightOffset = navigation.offsetHeight + toolbar.offsetHeight;
    const windowHeight = window.innerHeight;
 
-   const { handleMove, startDragging, stopDragging } = useSlider();
+   const { handleMove, startDragging, stopDragging, dragging } = useSlider();
 
    const [top, setTop] = useState('50%');
    const [detailsTop, setDetailsTop] = useState('50%');
@@ -26,6 +26,8 @@ const Output = ({ codeExecutionRes }) => {
    };
 
    const handleSliderMove = (e) => {
+      if (!dragging) return;
+
       let { positionY } = handleMove(e);
       positionY = checkSliderPosition(positionY);
 
@@ -45,14 +47,12 @@ const Output = ({ codeExecutionRes }) => {
       >
          <div className="output--position-rel"></div>
          <div className="output__info" style={{ height: outputHeight }}>
-            dupa
+            {codeExecutionRes}
          </div>
          <div
             className="output__details"
             style={{ top: detailsTop, height: detailsHeight }}
-         >
-            kupa
-         </div>
+         ></div>
          <div class="slider__divider" style={{ top: top }}>
             <div
                class="slider__handle"

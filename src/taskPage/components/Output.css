@@ -4,8 +4,9 @@
    position: fixed;
    z-index: 1;
    width: 100%;
-   top: 6rem;
+   top: 11vh;
    left: 0;
+   color: white;
 }
 
 .output--position-rel {
@@ -63,7 +64,7 @@
 
 @media (min-width: 568px) {
    .output {
-      top: 7rem;
+      top: 13vh;
    }
 }
 
@@ -85,19 +86,19 @@
    .output__details {
       position: static;
       height: 100%;
-      overflow-y: scroll;
-      overflow-y: hidden;
+      overflow-y: auto;
       padding: 0.5rem;
-      border-top: 5px solid #e8ff08;
+      border-top: 2px solid #e8ff08;
       background-color: #032538;
       color: white;
    }
 
    .output__info {
-      border-right: 2px solid #e8ff08;
+      border-right: 1px solid #e8ff08;
    }
 
    .output__details {
-      border-left: 2px solid #e8ff08;
+      border-left: 1px solid #e8ff08;
+      display: none;
    }
 }

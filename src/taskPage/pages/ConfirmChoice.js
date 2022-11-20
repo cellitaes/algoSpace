@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { URL } from '../../config';
 import Select from 'react-select';
@@ -9,6 +9,7 @@ import './ConfirmChoice.css';
 import Button from '../../shared/components/FormElements/Button';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import { AuthContext } from '../../shared/context/AuthContext.js';
 import { useHttpClient } from '../../shared/hooks/httpHook';
 
 const ConfirmChoice = () => {
@@ -21,12 +22,20 @@ const ConfirmChoice = () => {
    const [isTouched, setIsTouched] = useState(false);
 
    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+   const { token } = useContext(AuthContext);
 
    useEffect(() => {
       const getTaskById = async () => {
          const url = `${URL}/tasks/${taskId}`;
-         const data = await sendRequest(url);
-         setTask(data);
+         const method = 'GET';
+         const body = null;
+         const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+         };
+
+         const data = await sendRequest(url, method, body, headers);
+         setTask(data.data);
       };
       getTaskById();
    }, []);

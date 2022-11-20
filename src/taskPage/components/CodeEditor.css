@@ -42,7 +42,7 @@
 
 .editor {
    position: fixed;
-   top: 6rem;
+   top: 11vh;
    left: 0;
    width: 100%;
 }
@@ -50,7 +50,7 @@
 .minimalize-editor {
    position: fixed;
    z-index: 2;
-   top: 4rem;
+   top: 8vh;
    left: 0;
    width: 100%;
    background-color: #031b29;
@@ -82,13 +82,13 @@
    }
 
    .editor {
-      top: 7rem;
+      top: 13vh;
    }
 }
 
 @media (min-width: 1024px) {
    .editor-container {
-      height: 93vh;
+      height: 92vh;
    }
 
    .none-edit::after {

@@ -75,11 +75,11 @@ const CategoriesList = () => {
       const getCategoriesAndTasks = async () => {
          let url = `${URL}/categories`;
          const fetchedCategories = await sendRequest(url);
-         setCategories([...fetchedCategories, ...futureCategories]);
+         setCategories([...fetchedCategories.data, ...futureCategories]);
 
-         url = `${URL}/tasks`;
+         url = `${URL}/tasks/number`;
          const allTasks = await sendRequest(url);
-         setTasks(allTasks);
+         setTasks(allTasks.data);
       };
       getCategoriesAndTasks();
    }, []);
@@ -91,7 +91,7 @@ const CategoriesList = () => {
          <div className="categories">
             <div className="categories__introduction">
                <h1>
-                  {tasks.length} zadań obejmujących{' '}
+                  {tasks} zadań obejmujących{' '}
                   {categories.length - futureCategories.length + ' '}
                   kategorii.
                </h1>

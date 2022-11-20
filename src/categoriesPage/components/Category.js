@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { NavLink, useParams } from 'react-router-dom';
 import { useHttpClient } from '../../shared/hooks/httpHook';
@@ -6,6 +6,7 @@ import { useHttpClient } from '../../shared/hooks/httpHook';
 import { URL } from '../../config';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import { AuthContext } from '../../shared/context/AuthContext.js';
 
 import './Category.css';
 
@@ -21,11 +22,20 @@ const Category = () => {
 
    const { category } = useParams();
 
+   const { token } = useContext(AuthContext);
+
    useEffect(() => {
       const getTasksByParam = async () => {
          const url = `${URL}/tasks`;
-         const tasks = await sendRequest(url);
-         setTasks(tasks);
+         const method = 'GET';
+         const body = null;
+         const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+         };
+
+         const tasks = await sendRequest(url, method, body, headers);
+         setTasks(tasks.data);
       };
       getTasksByParam();
    }, []);

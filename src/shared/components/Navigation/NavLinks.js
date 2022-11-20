@@ -1,17 +1,23 @@
 import React from 'react';
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+
+import { AuthContext } from '../../context/AuthContext';
 
 import './NavLinks.css';
 
-const navlinks = [
+const loggedInNavlinks = [
    {
       text: 'ranking',
       to: '/ranks',
    },
    {
-      text: 'kategorie',
-      to: '/categories/all',
+      text: 'Zadania',
+      to: '/tasks/all',
    },
+];
+
+const notLoggedInNavlinks = [
    {
       text: 'zaloguj się',
       to: '/login',
@@ -23,6 +29,10 @@ const navlinks = [
 ];
 
 const NavLinks = () => {
+   const { isLoggedIn, logout } = useContext(AuthContext);
+
+   const navlinks = isLoggedIn ? loggedInNavlinks : notLoggedInNavlinks;
+
    return (
       <ul className="nav-links">
          {navlinks.map((navlink) => (
@@ -44,6 +54,15 @@ const NavLinks = () => {
                </NavLink>
             </li>
          ))}
+         {isLoggedIn && (
+            <li className="user-profile">
+               <i class="fa-solid fa-user"></i>
+               <div className="dropdown-content">
+                  <a href="#">Profil</a>
+                  <a onClick={logout}>wyloguj się</a>
+               </div>
+            </li>
+         )}
       </ul>
    );
 };

@@ -1,8 +1,24 @@
+.auth-form {
+   z-index: 2;
+   background-color: rgba(0, 0, 0, 0.2);
+   width: 100%;
+   height: 92vh;
+   display: flex;
+   flex-direction: column;
+   margin-top: 4vh;
+   justify-content: center;
+}
+
+.auth-form h1 {
+   text-align: center;
+   color: #e8ff08;
+}
+
 .form-field--center {
    display: flex;
    flex-direction: column;
    justify-content: center;
-   width: 95%;
+   width: 70%;
    margin: 0 auto;
    padding: 0.2rem 0;
 }
@@ -61,18 +77,9 @@
    letter-spacing: 1px;
 }
 
-@media (min-width: 568px) {
-   .auth-form {
-      width: 75%;
-   }
-}
-
 @media (min-width: 768px) {
-   .auth-form {
-      width: 60%;
-   }
    .form-field--center {
-      width: 70%;
+      width: 40%;
    }
 }
 
@@ -83,10 +90,7 @@
 }
 
 @media (min-width: 1336px) {
-   .auth-form {
-      width: 50%;
-   }
    .form-field--center {
-      width: 60%;
+      width: 30%;
    }
 }

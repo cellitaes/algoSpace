@@ -3,8 +3,8 @@
 }
 
 .layout-wrapper {
-   margin-top: 4rem;
-   min-height: calc(100vh-4rem);
+   margin-top: 8vh;
+   min-height: calc(100vh-8vh);
    display: flex;
    flex-direction: column;
 }

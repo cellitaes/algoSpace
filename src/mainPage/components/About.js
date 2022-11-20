@@ -11,27 +11,32 @@ const about = [
    {
       id: 1,
       img: allInOne,
-      text: 'All in one, dostęp do lekcji oraz zadań z nimi związanych',
+      text: 'Dostęp do zadań podzielonych na kategorie',
+      available: true,
    },
    {
       id: 2,
       img: checkAnswer,
       text: 'Weryfikacja wszystkich rozwiązań wraz z ich oceną',
+      available: true,
    },
    {
       id: 3,
       img: database,
       text: 'Weryfikacja czy rozwiązanie nie wychodzi poza określone ramy alokacji pamięci',
+      available: false,
    },
    {
       id: 4,
       img: rank,
-      text: 'Ranking rozwiązań, oceniana jest szybkość przesłania oraz poprawność',
+      text: 'Ranking rozwiązań, oceniana jest liczba rozwiązanych zadań',
+      available: false,
    },
    {
       id: 5,
       img: timeLimit,
       text: 'Weryfikacja czy rozwiązanie spełnia określone założenie czasowe',
+      available: false,
    },
 ];
 
@@ -42,6 +47,9 @@ const About = () => {
             <ul className="about__unordered-list">
                {about.map((content) => (
                   <li key={content.id} className="about__list-item">
+                     {!content.available && (
+                        <div className="about-list-item__not-available"></div>
+                     )}
                      <div className="list-item__content">
                         <img src={content.img} alt={content.text} />
                         <p className="paragraph--normal-font">{content.text}</p>
