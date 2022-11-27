@@ -34,33 +34,18 @@ const footerOptions = [
    },
    {
       optId: 2,
-      text: 'FAQ',
-      to: '/faq',
-   },
-   {
-      optId: 3,
       text: 'Ranking',
       to: '/ranks',
    },
    {
-      optId: 4,
-      text: 'Forum',
-      to: '/forum',
-   },
-   {
-      optId: 5,
-      text: 'Lekcje',
-      to: '/lessons',
-   },
-   {
-      optId: 6,
-      text: 'Kategorie',
-      to: '/categories',
-   },
-   {
-      optId: 7,
+      optId: 3,
       text: 'Zadania',
-      to: '/tasks',
+      to: '/tasks/all',
+   },
+   {
+      optId: 4,
+      text: 'Historia Rozwiązań',
+      to: '/solution-history',
    },
 ];
 

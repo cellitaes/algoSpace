@@ -42,11 +42,11 @@ const MainNavigation = () => {
                <span />
                <span />
             </button>
-            <h1 className="main-navigation__logo">
+            <div className="main-navigation__logo">
                <Link to="/">
                   <img src={logo} alt={'logo'} />
                </Link>
-            </h1>
+            </div>
             <div className="main-navigation__login-button">
                {isLoggedIn ? (
                   <Button onClick={logout} size={'xs'}>

@@ -16,8 +16,9 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 
 import { AuthContext } from '../../shared/context/AuthContext.js';
 import { useHttpClient } from '../../shared/hooks/httpHook';
-import { useModal } from '../../shared/hooks/modalHook';
+import { usePopUp } from '../../shared/hooks/modalHook';
 import { useSlider } from '../../shared/hooks/slideHook';
+import { useCallback } from 'react';
 
 const changeLanguageContent =
    'Czy na pewno chcesz zmienić język? Spowoduje to nieodwracalne utracenie aktualnych zmian.';
@@ -53,11 +54,6 @@ const manageTaskState = (state, action) => {
          return {
             ...state,
             language: action.language,
-         };
-      case 'SET_OUPUT':
-         return {
-            ...state,
-            showOutput: action.showOutput,
          };
       case 'SET_DESCRIPTIONMODE':
          return {
@@ -115,9 +111,20 @@ const Task = () => {
    } = tableState;
 
    const { isLoading, error, sendRequest, clearError } = useHttpClient();
-   const [open, openModal, closeModal] = useModal();
+   const [open, openModal, closeModal] = usePopUp();
    const { dragging, handleMove, startDragging, stopDragging } = useSlider();
    const { token } = useContext(AuthContext);
+
+   const searchForTemplateCode = useCallback(
+      (task) => {
+         const template = task?.templates?.find(
+            ({ language: templateLanguage }) =>
+               templateLanguage.toLowerCase() === language.value.toLowerCase()
+         );
+         return template;
+      },
+      [language?.value]
+   );
 
    useEffect(() => {
       const getTaskById = async () => {
@@ -137,21 +144,13 @@ const Task = () => {
          dispatchTaskState({ type: 'CODE_CHANGE', code: template.content });
       };
       getTaskById();
-   }, []);
+   }, [searchForTemplateCode, sendRequest, taskId, token]);
 
    useEffect(() => {
       const template = searchForTemplateCode(task);
       if (!template?.content) return;
       setNewLangAndChangeCode(template);
-   }, [language]);
-
-   const searchForTemplateCode = (task) => {
-      const template = task?.templates?.find(
-         ({ language: templateLanguage }) =>
-            templateLanguage.toLowerCase() === language.value.toLowerCase()
-      );
-      return template;
-   };
+   }, [language, searchForTemplateCode, task]);
 
    const handleEditorChange = (value) => {
       dispatchTaskState({ type: 'CODE_CHANGE', code: value });
@@ -236,10 +235,6 @@ const Task = () => {
          editorWidth: 100 - introductionWidth,
          left: introductionWidth,
       });
-   };
-
-   const toggleOutputState = () => {
-      dispatchTaskState({ type: 'SET_OUPUT', showOutput: !showOutput });
    };
 
    const changeDescriptionMode = (descMode) => {
@@ -330,7 +325,6 @@ const Task = () => {
                   handleEditorChange={handleEditorChange}
                   code={code}
                   showOutput={showOutput}
-                  toggleOutputState={toggleOutputState}
                />
             </div>
          </div>

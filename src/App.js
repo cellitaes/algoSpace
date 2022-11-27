@@ -10,6 +10,7 @@ import NotFound from './shared/util/pages/NotFound';
 import PrivateRoute from './Routes/PrivateRoute';
 import PublicRoute from './Routes/PublicRoute';
 import Rank from './rankPage/pages/Rank';
+import ScrollToTop from './shared/util/components/ScrollToTop';
 import Task from './taskPage/pages/Task';
 
 import './App.css';
@@ -19,36 +20,38 @@ import { AuthProvider } from './shared/context/AuthContext.js';
 const App = () => {
    return (
       <Router>
-         <AuthProvider>
-            <MainNavigation />
-            <div className="layout-wrapper">
-               <Switch>
-                  <PublicRoute path="/" exact>
-                     <MainPage />
-                  </PublicRoute>
-                  <PublicRoute path="/register" exact>
-                     <Auth />
-                  </PublicRoute>
-                  <PublicRoute path="/login" exact>
-                     <Auth />
-                  </PublicRoute>
-                  <PrivateRoute path="/ranks" exact>
-                     <Rank />
-                  </PrivateRoute>
-                  <PrivateRoute path="/tasks/:category" exact>
-                     <Categories />
-                  </PrivateRoute>
-                  <PrivateRoute path="/start/task/:taskId" exact>
-                     <ConfirmChoice />
-                  </PrivateRoute>
-                  <PrivateRoute path="/task/:taskId" exact>
-                     <Task />
-                  </PrivateRoute>
-                  <NotFound />
-               </Switch>
-               <Footer />
-            </div>
-         </AuthProvider>
+         <ScrollToTop>
+            <AuthProvider>
+               <div className="layout-wrapper">
+                  <MainNavigation />
+                  <Switch>
+                     <PublicRoute path="/" exact>
+                        <MainPage />
+                     </PublicRoute>
+                     <PublicRoute path="/register" exact>
+                        <Auth />
+                     </PublicRoute>
+                     <PublicRoute path="/login" exact>
+                        <Auth />
+                     </PublicRoute>
+                     <PublicRoute path="/ranks" exact>
+                        <Rank />
+                     </PublicRoute>
+                     <PrivateRoute path="/tasks/:category" exact>
+                        <Categories />
+                     </PrivateRoute>
+                     <PrivateRoute path="/start/task/:taskId" exact>
+                        <ConfirmChoice />
+                     </PrivateRoute>
+                     <PrivateRoute path="/task/:taskId" exact>
+                        <Task />
+                     </PrivateRoute>
+                     <NotFound />
+                  </Switch>
+                  <Footer />
+               </div>
+            </AuthProvider>
+         </ScrollToTop>
       </Router>
    );
 };

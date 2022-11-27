@@ -74,7 +74,7 @@ const LanguagesList = () => {
       <div className="languages-container">
          <div className="languages-container__content">
             <h3 className="languages-container__title">
-               Możliwość testowania kodu w aż 8 językach
+               Możliwość testowania kodu w aż 3 językach
             </h3>
             <p className="paragraph--padding-sx paragraph--color-white paragraph--justify paragraph--normal-font">
                Nie ma nic bardziej frustrującego niż otwarcie książki

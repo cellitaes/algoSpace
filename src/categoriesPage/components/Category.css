@@ -18,7 +18,14 @@
    margin: 1rem 0;
 }
 
-.category-pagination {
+.rank-pagination {
+   text-align: left;
+   margin-left: auto;
+   margin-bottom: 2vh;
+}
+
+.category-pagination,
+.rank-pagination {
    list-style: none;
    display: flex;
    justify-content: center;
@@ -28,18 +35,21 @@
    max-width: 500px;
 }
 
-.category-pagination li {
+.category-pagination li,
+.rank-pagination li {
    flex-basis: 40px;
    margin: 0 0.25rem;
    cursor: pointer;
    color: #e8ff08;
 }
 
-.category-pagination li a {
+.category-pagination li a,
+.rank-pagination li a {
    padding: 5px 10px;
 }
 
-.category-pagination .selected {
+.category-pagination .selected,
+.rank-pagination .selected {
    flex-basis: 2rem;
    height: 2rem;
    background-color: #e8ff08;
@@ -50,23 +60,29 @@
    justify-content: center;
 }
 
-.category-pagination .previous {
+.category-pagination .previous,
+.rank-pagination .previous {
    flex-basis: 20%;
    border-right: 2px solid #e8ff08;
    margin-right: auto;
+   height: 100%;
 }
 
-.category-pagination .next {
+.category-pagination .next,
+.rank-pagination .next {
    flex-basis: 20%;
    border-left: 2px solid #e8ff08;
    margin-left: auto;
+   height: 100%;
 }
 
-.category-pagination .previous a i {
+.category-pagination .previous a i,
+.rank-pagination .previous a i {
    padding: 0.6rem 0.8rem;
 }
 
-.category-pagination .next a i {
+.category-pagination .next a i,
+.rank-pagination .next a i {
    padding: 0.6rem 0.8rem;
 }
 
@@ -120,17 +136,19 @@
 .task__done {
    font-size: 1.6rem;
    margin: auto 0.8rem;
-   color: #1aee4c;
+   color: rgb(85, 235, 65);
    align-items: center;
 }
 
 @media (min-width: 568px) {
-   .category-pagination {
+   .category-pagination,
+   .rank-pagination {
       font-size: 1.5rem;
       height: 40px;
    }
 
-   .category-pagination .selected {
+   .category-pagination .selected,
+   .rank-pagination .selected {
       flex-basis: 2.5rem;
    }
 
@@ -149,7 +167,9 @@
    }
 
    .category-pagination .next,
-   .category-pagination .previous {
+   .category-pagination .previous,
+   .rank-pagination .next,
+   .rank-pagination .previous {
       flex-basis: 5rem;
    }
 }

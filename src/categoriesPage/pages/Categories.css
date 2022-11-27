@@ -8,7 +8,7 @@
 }
 
 .categories-list {
-   overflow-x: scroll;
+   overflow-x: auto;
    display: flex;
    margin: 1.5rem 0;
 }
@@ -67,11 +67,5 @@
       max-width: 1024px;
       flex-grow: 1;
       margin-top: 1rem;
-   }
-}
-
-@media (min-width: 1336px) {
-   .categories-container {
-      height: 90vh;
    }
 }

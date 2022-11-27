@@ -1,22 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { NavLink, useLocation, useHistory } from 'react-router-dom';
 
 import Button from '../../shared/components/FormElements/Button';
+import CustomSnackbar from '../../shared/components/UIElements/Snackbar';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import EventInput from '../../shared/components/FormElements/EventInput';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 
 import './AuthForm.css';
-import Modal from '../../shared/components/UIElements/Modal';
 import RegisterSchema from '../../shared/util/formSchemas/registerSchema';
 
 import { AuthContext } from '../../shared/context/AuthContext.js';
 import { useHttpClient } from '../../shared/hooks/httpHook';
-import { useModal } from '../../shared/hooks/modalHook';
+import { usePopUp } from '../../shared/hooks/modalHook';
 import { URL } from '../../config';
 import useScrollBlock from '../../shared/hooks/useScrollBlock';
-import { useEffect } from 'react';
 
 const loginFields = [
    {
@@ -41,15 +40,22 @@ const registerFields = [
 ];
 
 const hasValue = (value) => value !== '';
+let timeoutIdx;
 
 const AuthForm = () => {
+   const [formError, setFormError] = useState('');
+   const [severity, setSeverity] = useState('');
+   const [usernameCheck, setUsernameCheck] = useState(false);
+
    const location = useLocation();
    const history = useHistory();
 
    const { login } = useContext(AuthContext);
 
-   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-   const [open, openModal, closeModal] = useModal();
+   const { isLoading, error, errorCode, sendRequest, clearError } =
+      useHttpClient();
+   const [open, content, setPopUpContent, openSnackbar, closeSnackbar] =
+      usePopUp();
    const { blockScroll, allowScroll } = useScrollBlock();
 
    const isRegistration = location.pathname === '/register';
@@ -60,9 +66,34 @@ const AuthForm = () => {
       return () => {
          allowScroll();
       };
-   }, []);
+   }, [blockScroll, allowScroll]);
 
-   const handleAuthSubmit = async (formValues, actions) => {
+   useEffect(() => {
+      setFormError('');
+   }, [isRegistration]);
+
+   useEffect(() => {
+      switch (errorCode) {
+         case 201:
+            setSeverity('success');
+            setPopUpContent('Pomyślnie utworzono nowe konto');
+            break;
+         case 401:
+            setSeverity('error');
+            setPopUpContent('Niepoprawna nazwa użytkownika bądź hasło!');
+            break;
+         case 500:
+            setSeverity('error');
+            setPopUpContent('Coś poszło nie tak!');
+            break;
+         default:
+            return;
+      }
+
+      if (errorCode) openSnackbar();
+   }, [errorCode, openSnackbar, setPopUpContent]);
+
+   const handleAuthSubmit = async (formValues) => {
       const authUrl = `${URL}/${isRegistration ? 'users/register' : 'login'}`;
       const method = 'POST';
       const body = isRegistration
@@ -79,19 +110,47 @@ const AuthForm = () => {
          'Content-Type': 'application/json',
       };
 
+      setFormError('');
       const response = await sendRequest(authUrl, method, body, headers);
-      const { data, ok } = response;
 
+      const { data, ok } = response;
       if (isRegistration && ok) {
          history.push('/login');
-         actions.resetForm();
-         openModal();
       } else if (ok) {
          const token = data.token.split(' ')[1];
          login(data.username, token);
-         actions.resetForm();
          history.push('/');
       }
+   };
+
+   const handleCheckUsername = async (formFields) => {
+      if (
+         formFields?.target?.dataset?.testid !== 'login' ||
+         !formFields?.target?.value ||
+         !isRegistration
+      )
+         return;
+      setUsernameCheck(true);
+      setFormError('');
+      clearTimeout(timeoutIdx);
+      timeoutIdx = setTimeout(() => {
+         const checkUsername = async () => {
+            const authUrl = `${URL}/users/username-availability`;
+            const method = 'POST';
+            const body = formFields?.target?.defaultValue;
+            const headers = {
+               'Content-Type': 'text/plain',
+            };
+
+            const response = await sendRequest(authUrl, method, body, headers);
+            const { data } = response;
+            if (!data) {
+               setFormError('Nazwa użtkownika jest już zajęta');
+            }
+            setUsernameCheck(false);
+         };
+         checkUsername();
+      }, 500);
    };
 
    const initLoginState = {
@@ -107,25 +166,22 @@ const AuthForm = () => {
    return (
       <>
          {error && <ErrorModal error={error} onClear={clearError} />}
-         {open && (
-            <Modal
-               onCancel={closeModal}
-               header="Pomyślnie utworzono konto!"
-               show={open}
-               footer={<Button onClick={closeModal}>Okay</Button>}
-            >
-               <p>Twoje konto zostało utworzone. Możesz teraz zalogować się!</p>
-            </Modal>
-         )}
+         <CustomSnackbar
+            open={open}
+            closeSnackbar={closeSnackbar}
+            severity={severity}
+            text={content}
+         />
          {isLoading && <LoadingSpinner asOverlay />}
          <h1>{isRegistration ? 'Stwórz konto' : 'Zaloguj się'}</h1>
          <Formik
             initialValues={
                isRegistration ? initFormRegistryState : initLoginState
             }
+            enableReinitialize={true}
             validationSchema={isRegistration && RegisterSchema}
-            onSubmit={(values, actions) => {
-               handleAuthSubmit(values, actions);
+            onSubmit={(values) => {
+               handleAuthSubmit(values);
             }}
          >
             {(props) => {
@@ -133,7 +189,9 @@ const AuthForm = () => {
                   hasValue
                );
                return (
-                  <Form>
+                  <Form
+                     onChange={(formFields) => handleCheckUsername(formFields)}
+                  >
                      {formFields.map((formField) => (
                         <Field key={formField.name} name={formField.name}>
                            {({ field, form: { touched, errors } }) => (
@@ -147,6 +205,9 @@ const AuthForm = () => {
                            )}
                         </Field>
                      ))}
+                     {formError && isRegistration && (
+                        <div className="error">{formError}</div>
+                     )}
                      <div className="center">
                         <span className="question">
                            {isRegistration
@@ -174,9 +235,11 @@ const AuthForm = () => {
                      <div className="eventForm__button eventForm__button--spacing">
                         <Button
                            disabled={
-                              !isRegistration
-                                 ? false
-                                 : !everyItemHasValue || !props.isValid
+                              (isRegistration &&
+                                 (!everyItemHasValue || !props.isValid)) ||
+                              isLoading ||
+                              usernameCheck ||
+                              formError
                            }
                            type="submit"
                         >

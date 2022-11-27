@@ -4,7 +4,7 @@
 
 .layout-wrapper {
    margin-top: 8vh;
-   min-height: calc(100vh-8vh);
+   min-height: 92vh;
    display: flex;
    flex-direction: column;
 }

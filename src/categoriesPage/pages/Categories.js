@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useHttpClient } from '../../shared/hooks/httpHook';
 
@@ -10,14 +10,16 @@ import './Categories.css';
 import { AuthContext } from '../../shared/context/AuthContext.js';
 import { URL } from '../../config';
 
+const initCategory = {
+   categoryId: 'ALL',
+   translation: 'Wszystkie',
+};
+
 const Categories = () => {
    const { isLoading, error, sendRequest, clearError } = useHttpClient();
-
    const { token } = useContext(AuthContext);
 
-   const [categories, setCategories] = useState([
-      { categoryId: 'ALL', translation: 'Wszystkie' },
-   ]);
+   const [categories, setCategories] = useState([initCategory]);
 
    useEffect(() => {
       const getCategories = async () => {
@@ -35,7 +37,7 @@ const Categories = () => {
             body,
             headers
          );
-         setCategories([...categories, ...fetchedCategories.data]);
+         setCategories([initCategory, ...fetchedCategories.data]);
       };
       getCategories();
    }, []);
@@ -59,7 +61,7 @@ const Categories = () => {
                   ))}
                </div>
                <div className="category-tasks">
-                  <Category />
+                  <Category categories={categories} />
                </div>
             </div>
          </div>

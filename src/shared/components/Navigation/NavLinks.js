@@ -6,30 +6,43 @@ import { AuthContext } from '../../context/AuthContext';
 
 import './NavLinks.css';
 
-const loggedInNavlinks = [
-   {
-      text: 'ranking',
-      to: '/ranks',
-   },
-   {
-      text: 'Zadania',
-      to: '/tasks/all',
-   },
-];
-
-const notLoggedInNavlinks = [
-   {
-      text: 'zaloguj się',
-      to: '/login',
-   },
-   {
-      text: 'zarejestruj się',
-      to: '/register',
-   },
-];
-
 const NavLinks = () => {
-   const { isLoggedIn, logout } = useContext(AuthContext);
+   const { isLoggedIn, userId, logout } = useContext(AuthContext);
+
+   const loggedInNavlinks = [
+      {
+         text: 'ranking',
+         to: '/ranks',
+      },
+      {
+         text: 'Zadania',
+         to: '/tasks/all',
+      },
+      {
+         text: 'Historia rozwiązań',
+         to: '/solution-history',
+      },
+      {
+         text: 'Wyloguj się',
+         to: '#',
+         onClick: logout,
+      },
+   ];
+
+   const notLoggedInNavlinks = [
+      {
+         text: 'ranking',
+         to: '/ranks',
+      },
+      {
+         text: 'zaloguj się',
+         to: '/login',
+      },
+      {
+         text: 'zarejestruj się',
+         to: '/register',
+      },
+   ];
 
    const navlinks = isLoggedIn ? loggedInNavlinks : notLoggedInNavlinks;
 
@@ -38,11 +51,12 @@ const NavLinks = () => {
          {navlinks.map((navlink) => (
             <li key={navlink.text}>
                <NavLink
+                  onClick={navlink.onClick}
                   to={navlink.to}
                   isActive={(match, location) => {
                      if (
-                        location.pathname.indexOf('categories') > -1 &&
-                        navlink.to === '/categories/all'
+                        location.pathname.indexOf('tasks') > -1 &&
+                        navlink.to === '/tasks/all'
                      ) {
                         return true;
                      } else {
@@ -55,13 +69,12 @@ const NavLinks = () => {
             </li>
          ))}
          {isLoggedIn && (
-            <li className="user-profile">
-               <i class="fa-solid fa-user"></i>
-               <div className="dropdown-content">
-                  <a href="#">Profil</a>
-                  <a onClick={logout}>wyloguj się</a>
-               </div>
-            </li>
+            <>
+               <li className="user-profile">
+                  <span className="user-profile__greetings">{userId}</span>
+                  <i class="fa-solid fa-user"></i>
+               </li>
+            </>
          )}
       </ul>
    );

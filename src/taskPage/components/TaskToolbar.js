@@ -1,10 +1,11 @@
-import { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useState, useContext, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import Select from 'react-select';
 
 import Button from '../../shared/components/FormElements/Button';
 import ConfirmationModal from '../../shared/components/Modals/ConfirmationModal';
-import { useModal } from '../../shared/hooks/modalHook';
+import Modal from '../../shared/components/UIElements/Modal';
+import { usePopUp } from '../../shared/hooks/modalHook';
 import { useHttpClient } from '../../shared/hooks/httpHook';
 
 import { customStyles } from '../components/SelectCustomStyles';
@@ -17,10 +18,6 @@ const quitPageContent =
    'Czy na pewno chcesz opuścić stronę? Spowoduje to nieodwracalne utracenie aktualnych zmian.';
 const quitPageHeader = 'Powrót do zadań';
 
-const taskSolvedContent = 'Zadanie zostało poprawnie rozwiązane!';
-let taskSolutionContent = 'Twoje rozwiązanie jest';
-const taskNotSolvedContent = 'Zadanie nie zostało rozwiązane poprawnie :(.';
-
 const TaskToolbar = ({
    title,
    language,
@@ -32,12 +29,26 @@ const TaskToolbar = ({
    code,
 }) => {
    const history = useHistory();
+   const { taskId } = useParams();
 
-   const [openQuitPage, openQuitPageModal, closeQuitPageModal] = useModal();
-   const [openTaskSolution, openTaskSolutionModal, closeTaskSolutionModal] =
-      useModal();
-   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+   const [
+      openQuitPage,
+      quitPagContent,
+      setQuitPagPopUpContent,
+      openQuitPageModal,
+      closeQuitPageModal,
+   ] = usePopUp();
+   const [
+      openTaskSolution,
+      taskSolutionContent,
+      setTaskSolutionPopUpContent,
+      openTaskSolutionModal,
+      closeTaskSolutionModal,
+   ] = usePopUp();
+   const { isLoading, error, errorCode, sendRequest, clearError } =
+      useHttpClient();
    const { token, userId } = useContext(AuthContext);
+   const [isCorrect, setIsCorrect] = useState(false);
 
    const checkSolution = async () => {
       const url = 'http://localhost:8080/solution/check';
@@ -45,8 +56,8 @@ const TaskToolbar = ({
       const body = JSON.stringify({
          submissionDate: new Date().toISOString(),
          content: code,
-         language: 'JAVA',
-         taskId: 2,
+         language: language?.value?.toUpperCase(),
+         taskId: taskId,
          solverUsername: userId,
       });
       const headers = {
@@ -54,24 +65,58 @@ const TaskToolbar = ({
          Authorization: `Bearer ${token}`,
       };
 
-      const result = await sendRequest(url, method, body, headers);
-      if (!result.data) {
-         openTaskSolutionModal();
-      } else {
-      }
+      await sendRequest(url, method, body, headers);
    };
+
+   useEffect(() => {
+      switch (errorCode) {
+         case 200:
+            setIsCorrect(true);
+            setTaskSolutionPopUpContent(
+               'Zadanie zostało poprawnie rozwiązane!'
+            );
+            break;
+         case 500:
+            setIsCorrect(false);
+            setTaskSolutionPopUpContent('Coś poszło nie tak!');
+            break;
+         default:
+            setIsCorrect(false);
+            setTaskSolutionPopUpContent(
+               'Zadanie nie zostało rozwiązane poprawnie :(. Spróbuj ponowanie.'
+            );
+            break;
+      }
+
+      if (errorCode) openTaskSolutionModal();
+   }, [errorCode, openTaskSolutionModal, setTaskSolutionPopUpContent]);
 
    return (
       <>
          {isLoading && <LoadingSpinner asOverlay />}
          {error && <ErrorModal error={error} onClear={clearError} />}
-         <ConfirmationModal
-            show={openTaskSolution}
-            content={quitPageContent}
-            header={quitPageHeader}
-            onCancel={closeTaskSolutionModal}
-            onClick={() => history.go(-2)}
-         />
+         {openTaskSolution && (
+            <Modal
+               onCancel={isCorrect ? history.go(-2) : closeTaskSolutionModal}
+               header={`Twoje rozwiązanie jest ${
+                  isCorrect ? 'poprawne' : 'niepoprawne'
+               }`}
+               show={openTaskSolution}
+               footer={
+                  <Button
+                     onClick={
+                        isCorrect
+                           ? () => history.push('/tasks/all')
+                           : closeTaskSolutionModal
+                     }
+                  >
+                     Okej
+                  </Button>
+               }
+            >
+               {taskSolutionContent}
+            </Modal>
+         )}
          <ConfirmationModal
             show={openQuitPage}
             content={quitPageContent}

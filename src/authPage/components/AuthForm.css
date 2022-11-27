@@ -53,7 +53,8 @@
    background: #ffd1d1;
 }
 
-.form-field--center div.error {
+div.error {
+   text-align: center;
    color: red;
 }
 

@@ -1,0 +1,103 @@
+.rank-wrapper {
+   background-color: #aaa;
+   flex: 1;
+}
+
+.rank {
+   margin: 5vh 3vw;
+   overflow-x: auto;
+}
+
+.pagination-container {
+   margin: 0 auto;
+   width: 100%;
+   max-width: 1000px;
+}
+
+table {
+   border-collapse: collapse;
+   background-color: white;
+   text-align: left;
+   padding: 0 5vw;
+   border-bottom: 20px solid #031b29;
+   margin: 0 auto;
+   width: 80%;
+   max-width: 1000px;
+}
+
+thead {
+   color: white;
+}
+
+th {
+   background-color: #031b29;
+   padding: 0.75rem 2rem;
+   text-transform: uppercase;
+   letter-spacing: 0.1rem;
+   font-size: 0.7rem;
+   font-weight: 900;
+   font-size: 0.8rem;
+}
+
+td {
+   padding: 0.5rem 1rem;
+}
+
+.row-place {
+   width: 10%;
+}
+
+.row-points {
+   width: 30%;
+}
+
+tr:nth-child(even) {
+   background-color: #031b2999;
+}
+
+tr td a {
+   text-decoration: none;
+   color: #275ef5;
+}
+
+tr:hover {
+   background-color: #031b2977;
+}
+
+tr td a:hover,
+tr td a:active {
+   color: #618bff;
+}
+
+table tr td ul li {
+   list-style: square;
+   list-style-position: inside;
+}
+
+@media (min-width: 350px) {
+   .pagination-container {
+      width: 90%;
+   }
+}
+
+@media (min-width: 400px) {
+   .pagination-container {
+      width: 80%;
+   }
+}
+
+@media (min-width: 1024px) {
+   .rank {
+      overflow-x: inherit;
+   }
+
+   table {
+      width: 100%;
+      box-shadow: 15px 15px 20px 5px black;
+      width: 75%;
+   }
+
+   .pagination-container {
+      width: 75%;
+   }
+}

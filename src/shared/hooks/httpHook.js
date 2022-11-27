@@ -3,9 +3,11 @@ import { useState, useCallback } from 'react';
 export const useHttpClient = () => {
    const [isLoading, setIsLoading] = useState(false);
    const [error, setError] = useState();
+   const [errorCode, setErrorCode] = useState(null);
 
    const sendRequest = useCallback(
       async (url, method = 'GET', body = null, headers = {}) => {
+         setErrorCode(null);
          setIsLoading(true);
 
          try {
@@ -20,6 +22,7 @@ export const useHttpClient = () => {
                responseData = await response.json();
             } catch (err) {}
 
+            setErrorCode(response.status);
             if (!response.ok) {
                throw new Error(responseData.message);
             }
@@ -43,5 +46,5 @@ export const useHttpClient = () => {
       setError(null);
    };
 
-   return { isLoading, error, sendRequest, clearError };
+   return { isLoading, error, errorCode, sendRequest, clearError };
 };

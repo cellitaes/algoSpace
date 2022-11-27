@@ -1,31 +1,28 @@
-import {
-   Accordion,
-   AccordionItem,
-   AccordionItemHeading,
-   AccordionItemButton,
-   AccordionItemPanel,
-} from 'react-accessible-accordion';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import 'react-accessible-accordion/dist/fancy-example.css';
 import './Hints.css';
 
 const Hints = ({ hints, displayNone }) => {
    return (
       <div className={`hints ${displayNone && 'display-none'}`}>
-         <Accordion>
-            {hints?.map((hint, idx) => (
-               <AccordionItem key={idx}>
-                  <AccordionItemHeading>
-                     <AccordionItemButton>
-                        {`Podpowiedź: ${idx + 1}`}
-                     </AccordionItemButton>
-                  </AccordionItemHeading>
-                  <AccordionItemPanel>
-                     <p>{hint.content}</p>
-                  </AccordionItemPanel>
-               </AccordionItem>
-            ))}
-         </Accordion>
+         {hints?.map((hint, idx) => (
+            <Accordion key={idx}>
+               <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="hint-content"
+                  id="hint-header"
+               >
+                  <Typography>{`Podpowiedź: ${idx + 1}`}</Typography>
+               </AccordionSummary>
+               <AccordionDetails>
+                  <Typography>{hint.content}</Typography>
+               </AccordionDetails>
+            </Accordion>
+         ))}
       </div>
    );
 };
