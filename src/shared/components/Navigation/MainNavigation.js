@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Backdrop from '../UIElements/Backdrop';
@@ -9,9 +9,12 @@ import SideDrawer from './SideDrawer';
 import './MainNavigation.css';
 
 import logo from '../../../static/images/AlgoSpace-logo.png';
+import { AuthContext } from '../../context/AuthContext.js';
 
-const MainNavigation = (props) => {
+const MainNavigation = () => {
    const [drawerIsOpen, setDrawerIsOpen] = useState(false);
+
+   const { isLoggedIn, logout } = useContext(AuthContext);
 
    const openDrawerHandler = () => {
       setDrawerIsOpen(true);
@@ -39,15 +42,21 @@ const MainNavigation = (props) => {
                <span />
                <span />
             </button>
-            <h1 className="main-navigation__logo">
+            <div className="main-navigation__logo">
                <Link to="/">
                   <img src={logo} alt={'logo'} />
                </Link>
-            </h1>
+            </div>
             <div className="main-navigation__login-button">
-               <Button to="/login" size={'xs'}>
-                  Zaloguj się
-               </Button>
+               {isLoggedIn ? (
+                  <Button onClick={logout} size={'xs'}>
+                     Wyloguj się
+                  </Button>
+               ) : (
+                  <Button to="/login" size={'xs'}>
+                     Zaloguj się
+                  </Button>
+               )}
             </div>
             <nav className="main-navigation__header-nav">
                <NavLinks />

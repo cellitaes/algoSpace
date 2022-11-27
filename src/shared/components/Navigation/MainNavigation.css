@@ -17,8 +17,7 @@
 }
 
 .main-navigation__logo {
-   width: 50%;
-   height: 70%;
+   height: 50%;
 }
 
 .main-navigation__logo a {
@@ -37,12 +36,6 @@
 
 .main-navigation__drawer-nav {
    height: 100%;
-}
-
-@media (min-width: 430px) {
-   .main-navigation__logo {
-      width: 12rem;
-   }
 }
 
 @media (min-width: 1024px) {

@@ -1,15 +1,21 @@
+import { useCallback } from 'react';
 import { useState } from 'react';
 
-export const useModal = () => {
+export const usePopUp = () => {
    const [open, setOpen] = useState(false);
+   const [content, setContent] = useState('');
 
-   const openModal = () => {
+   const openModal = useCallback(() => {
       setOpen(true);
-   };
+   }, []);
 
-   const closeModal = () => {
+   const closeModal = useCallback(() => {
       setOpen(false);
-   };
+   }, []);
 
-   return { open, openModal, closeModal };
+   const setPopUpContent = useCallback((text) => {
+      setContent(text);
+   }, []);
+
+   return [open, content, setPopUpContent, openModal, closeModal];
 };

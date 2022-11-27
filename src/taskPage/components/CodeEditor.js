@@ -1,22 +1,22 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Editor from '@monaco-editor/react';
 import monacoThemes from 'monaco-themes/themes/themelist';
 import Select from 'react-select';
 
-import {
-   RAPID_API_HOST,
-   RAPID_API_KEY,
-   APP_APPI_SUBMISSION_URL,
-} from '../../config';
-import { apiLanguages } from '../../shared/util/apiLanguages.js';
-
 import Button from '../../shared/components/FormElements/Button';
 import ConfirmationModal from '../../shared/components/Modals/ConfirmationModal';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Output from './Output';
 
-import { customStyles } from '../components/SelectCustomStyles';
 import './CodeEditor.css';
+
+import { AuthContext } from '../../shared/context/AuthContext';
+import { customStyles } from '../components/SelectCustomStyles';
+import { URL } from '../../config';
+import { useSlider } from '../../shared/hooks/slideHook';
+import { useEffect } from 'react';
 
 const CodeEditor = ({
    theme,
@@ -27,12 +27,24 @@ const CodeEditor = ({
    handleEditorChange,
    code,
    showOutput,
-   toggleOutputState,
 }) => {
+   const navigation = document.querySelector('.main-header');
+   const toolbar = document.querySelector('.minimalize-editor');
+   const heightOffset = navigation?.offsetHeight + toolbar?.offsetHeight;
+   const windowHeight = window.innerHeight;
+
+   const { handleMove, startDragging, stopDragging, dragging } = useSlider();
+
+   const [top, setTop] = useState();
+   const [outputHeight, setOutpuHeight] = useState();
+   const [editorHeight, setEditorHeight] = useState();
+
    const history = useHistory();
    const [openQuitModal, setOpenQuitModal] = useState(false);
    const [openSettings, setOpenSettings] = useState(false);
-   const [codeExecutionRes, setCodeExecutionRes] = useState({});
+   const [codeExecutionRes, setCodeExecutionRes] = useState('');
+
+   const { token } = useContext(AuthContext);
 
    const quitHeader = 'Czy na pewno chcesz wyjść?';
    const quitContent =
@@ -57,42 +69,53 @@ const CodeEditor = ({
       </div>
    );
 
-   const language_id = apiLanguages.find(
-      (lang) => lang.value === language.value
-   ).id;
+   useEffect(() => {
+      setOutpuHeight(200);
+      setEditorHeight(windowHeight - heightOffset - 200);
+      setTop(windowHeight - heightOffset - 200);
+   }, [setOutpuHeight, setEditorHeight, setTop, windowHeight, heightOffset]);
 
-   const checkCode = async (token) => {
-      const options = {
-         method: 'GET',
-         headers: {
-            'X-RapidAPI-Key': RAPID_API_KEY,
-            'X-RapidAPI-Host': RAPID_API_HOST,
-         },
+   const handleCodeCompile = async () => {
+      setCodeExecutionRes('');
+      const url = `${URL}/syntax/check`;
+      const method = 'POST';
+      const body = JSON.stringify({
+         language: language.value.toUpperCase(),
+         code: code,
+      });
+      const headers = {
+         'Content-Type': 'application/json',
+         Authorization: `Bearer ${token}`,
       };
 
-      await fetch(`${APP_APPI_SUBMISSION_URL}/${token}`, options)
-         .then((res) => res.json())
+      await fetch(url, {
+         method,
+         body,
+         headers,
+      })
+         .then((res) => res.text())
          .then((res) => setCodeExecutionRes(res));
    };
 
-   const sendCode = async () => {
-      const options = {
-         method: 'POST',
-         headers: {
-            'content-type': 'application/json',
-            'Content-Type': 'application/json',
-            'X-RapidAPI-Key': RAPID_API_KEY,
-            'X-RapidAPI-Host': RAPID_API_HOST,
-         },
-         body: JSON.stringify({
-            language_id: language_id,
-            source_code: code,
-         }),
-      };
+   const checkSliderPosition = (clientY) => {
+      let sliderPosiotion = clientY;
+      sliderPosiotion = clientY < heightOffset ? heightOffset : clientY;
+      sliderPosiotion = clientY > windowHeight ? windowHeight : sliderPosiotion;
 
-      await fetch(APP_APPI_SUBMISSION_URL, options)
-         .then((res) => res.json())
-         .then((token) => checkCode(token.token));
+      return sliderPosiotion;
+   };
+
+   const handleSliderMove = (e) => {
+      if (!dragging) return;
+
+      let { positionY } = handleMove(e);
+      positionY = checkSliderPosition(positionY);
+
+      if (windowHeight - positionY - window.pageYOffset < 0) return;
+
+      setTop(positionY - heightOffset + window.pageYOffset);
+      setOutpuHeight(windowHeight - positionY - window.pageYOffset);
+      setEditorHeight(windowHeight - heightOffset - outputHeight);
    };
 
    return (
@@ -112,13 +135,19 @@ const CodeEditor = ({
             onClick={() => setOpenSettings(false)}
             noFooter
          />
-         <div className="editor-container">
+         <div
+            className="editor-container"
+            onMouseMove={handleSliderMove}
+            onMouseUp={stopDragging}
+            onTouchEnd={stopDragging}
+            onTouchMove={handleSliderMove}
+         >
             <div
                className={`minimalize-editor ${
                   descriptionMode && 'display-none'
                }`}
             >
-               <Button size="xs" onClick={toggleOutputState}>
+               <Button size="xs" onClick={handleCodeCompile}>
                   <i class="fa-solid fa-play"></i>
                </Button>
                <div
@@ -132,15 +161,7 @@ const CodeEditor = ({
                   <Button size="xs" onClick={() => changeDescriptionMode(true)}>
                      <i class="fa-solid fa-down-left-and-up-right-to-center"></i>
                   </Button>
-                  <Button size="xs" onClick={() => setOpenQuitModal(true)}>
-                     <i class="fa-solid fa-door-open"></i>
-                  </Button>
                </div>
-               {showOutput && (
-                  <Button size="xs" onClick={sendCode}>
-                     Compile and execute
-                  </Button>
-               )}
             </div>
             <div className={`${descriptionMode ? 'none-edit' : 'editor'}`}>
                {descriptionMode && (
@@ -152,19 +173,34 @@ const CodeEditor = ({
                      Edytuj kod
                   </Button>
                )}
+
                <div className="code-editor-container">
-                  {code && (
+                  <div style={{ height: editorHeight }}>
                      <Editor
                         className="code-editor"
                         theme={theme.value}
-                        height={'93vh'}
+                        height={'100%'}
                         code={code}
                         language={language?.value}
                         defaultValue={code}
                         onChange={handleEditorChange}
                      />
-                  )}
-                  {showOutput && <Output codeExecutionRes={codeExecutionRes} />}
+                  </div>
+                  <div class="slider__divider" style={{ top: top }}>
+                     <div
+                        class="slider__handle"
+                        onMouseDown={startDragging}
+                        onTouchStart={startDragging}
+                        onMouseUp={stopDragging}
+                     >
+                        <i class="fa fa-chevron-up"></i>
+                        <i class="fa fa-chevron-down"></i>
+                     </div>
+                  </div>
+                  <Output
+                     codeExecutionRes={codeExecutionRes}
+                     outputHeightStyle={{ height: outputHeight }}
+                  />
                </div>
             </div>
          </div>

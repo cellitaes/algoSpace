@@ -15,34 +15,57 @@ const languagesList = [
       id: 1,
       img: cpp,
       langName: 'C++',
-      text: `for all you Old Schoolers++`,
+      text: `Dla wszystkich miłośników old school'u`,
+      available: true,
    },
    {
       id: 2,
       img: java,
       langName: 'Java',
-      text: 'for all you Masochists',
+      text: 'Dla wszystkich masochistów ;)',
+      available: true,
+   },
+   {
+      id: 5,
+      img: python,
+      langName: 'Python',
+      text: 'Dla wszystkich miłośników Data Science',
+      available: true,
    },
    {
       id: 3,
       img: javascript,
       langName: 'JavaScript',
-      text: 'for all you Front-End Developers',
+      text: 'Dla wszystkich miłośników frontendu',
+      available: false,
    },
-   { id: 4, img: kotlin, langName: 'Kotlin', text: 'for all you Androiders' },
    {
-      id: 5,
-      img: python,
-      langName: 'Python',
-      text: 'for all you Data Scientists',
+      id: 4,
+      img: kotlin,
+      langName: 'Kotlin',
+      text: 'Dla wszystkich miłośników Androida',
+      available: false,
    },
-   { id: 6, img: ruby, langName: 'Ruby', text: 'for all you minimalists' },
-   { id: 7, img: swift, langName: 'Swift', text: 'for all you iOS Engineers' },
+   {
+      id: 6,
+      img: ruby,
+      langName: 'Ruby',
+      text: 'Dla wszystkich miłośników minimalizmu',
+      available: false,
+   },
+   {
+      id: 7,
+      img: swift,
+      langName: 'Swift',
+      text: `Dla wszystkich miłośników iOS'a`,
+      available: false,
+   },
    {
       id: 8,
       img: typescript,
       langName: 'TypeScript',
-      text: 'for all you Edgy JavaScripters',
+      text: 'Dla wszystkich miłośników harmonii',
+      available: false,
    },
 ];
 
@@ -51,18 +74,21 @@ const LanguagesList = () => {
       <div className="languages-container">
          <div className="languages-container__content">
             <h3 className="languages-container__title">
-               Możliwość testowania kodu w aż 8 językach
+               Możliwość testowania kodu w aż 3 językach
             </h3>
             <p className="paragraph--padding-sx paragraph--color-white paragraph--justify paragraph--normal-font">
                Nie ma nic bardziej frustrującego niż otwarcie książki
                przygotowującej do rozmowy kwalifikacyjnej, tylko po to, by
                znaleźć kilka rozwiązań w języku programowania, którego nie
-               znasz. Dlatego wszystkie nasze pytania zawierają kompletne
-               rozwiązania pisemne w 8 popularnych językach.
+               znasz. Dlatego wszystkie nasze zadania można napisać w aż 3
+               popularnych językach.
             </p>
             <ul className="languages-list">
                {languagesList.map((lang) => (
                   <li className="list-item" key={lang.id}>
+                     {!lang.available && (
+                        <div className="list-item__not-available"></div>
+                     )}
                      <img
                         className="list-item__image"
                         src={lang.img}
@@ -88,14 +114,15 @@ const LanguagesList = () => {
                na temat kodowania, pisząc rozwiązania problemów w wybranym przez
                siebie języku, uzyskując w razie potrzeby kilka wskazówek,
                uruchamiając kod w oparciu o przypadki testowe i patrząc na
-               rozwiązania po zakończeniu.
+               poprawność rozwiązania po zakończeniu.
             </p>
             <p className="paragraph--padding-sx paragraph--color-white paragraph--justify paragraph--normal-font">
                Przekształciliśmy ten idealny świat w prawdziwy świat. Wybierz
-               język. Przeczytaj monit. Napisz swoje rozwiązanie. Uruchom swój
-               kod. Uzyskaj kilka wskazówek. Uruchom kod ponownie. Sprawdź dane
-               wyjściowe. Zdaj testy. Zobacz nasze rozwiązanie. Obejrzyj nasz
-               film. Wszystko w tej samej przestrzeni roboczej.
+               język. Przeczytaj wprowadzenie do zadania oraz zapoznaj się z
+               kryteriami testowymi. Napisz swoje rozwiązanie. Uruchom swój kod.
+               Uzyskaj kilka wskazówek. Skompiluj kod. Uruchom kod ponownie.
+               Sprawdź dane wyjściowe. Zdaj testy. Uzyskaj pozytywną ocenę
+               rozwiązanego zadania!
             </p>
          </div>
       </div>

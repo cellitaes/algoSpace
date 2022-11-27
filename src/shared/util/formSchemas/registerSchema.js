@@ -4,8 +4,8 @@ import YupPassword from 'yup-password';
 YupPassword(Yup);
 const RegisterSchema = Yup.object().shape({
    login: Yup.string()
-      .min(7, 'Login powinien zawierać co najmniej 7 znaków.')
-      .required('Wpisz login.'),
+      .required('Wprowadź nazwę użytkownika.')
+      .min(3, 'Nazwa użytkownika musi zawierać co najmniej 3 znaki'),
    password: Yup.string()
       .required('Wprowadź hasło.')
       .min(
@@ -20,12 +20,6 @@ const RegisterSchema = Yup.object().shape({
       [Yup.ref('password'), null],
       'Wprowadzone hasła muszą być takie same'
    ),
-   email: Yup.string()
-      .matches(
-         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-         'Wprowadź prawidłowy adres email.'
-      )
-      .required('Wprowadź adres email.'),
 });
 
 export default RegisterSchema;

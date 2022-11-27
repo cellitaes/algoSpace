@@ -6,11 +6,11 @@ import '../../util/css/Paragraph.css';
 const noMore = [
    {
       textId: 1,
-      text: 'Nigdy więcej wiadomości, które zostają zignorowane',
+      text: 'Nigdy więcej wiadomości, które zostają zignorowane.',
    },
    {
       textId: 2,
-      text: 'Nigdy więcej zimnych e-maili, które nigdzie nie trafiają',
+      text: 'Nigdy więcej nieprzespanych i zarawanych nocy.',
    },
    {
       textId: 3,
@@ -18,11 +18,11 @@ const noMore = [
    },
    {
       textId: 4,
-      text: 'Nigdy więcej programów polecających, które nie działają.',
+      text: 'Nigdy więcej uczucia bezradności w trakcie rozmowy rekrutacyjnej.',
    },
    {
       textId: 5,
-      text: 'Nigdy więcej agencj rekrutacyjnych, które kosztują fortunę.',
+      text: 'Nigdy więcej zadań kwalifikacyjnych, których nie potrafisz rozwiązań.',
    },
 ];
 
@@ -34,33 +34,18 @@ const footerOptions = [
    },
    {
       optId: 2,
-      text: 'FAQ',
-      to: '/faq',
-   },
-   {
-      optId: 3,
       text: 'Ranking',
       to: '/ranks',
    },
    {
-      optId: 4,
-      text: 'Forum',
-      to: '/forum',
-   },
-   {
-      optId: 5,
-      text: 'Lekcje',
-      to: '/lessons',
-   },
-   {
-      optId: 6,
-      text: 'Kategorie',
-      to: '/categories',
-   },
-   {
-      optId: 7,
+      optId: 3,
       text: 'Zadania',
-      to: '/tasks',
+      to: '/tasks/all',
+   },
+   {
+      optId: 4,
+      text: 'Historia Rozwiązań',
+      to: '/solution-history',
    },
 ];
 

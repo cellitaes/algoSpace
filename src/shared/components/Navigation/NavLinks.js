@@ -1,38 +1,62 @@
 import React from 'react';
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+
+import { AuthContext } from '../../context/AuthContext';
 
 import './NavLinks.css';
 
-const navlinks = [
-   {
-      text: 'ranking',
-      to: '/ranks',
-   },
-   {
-      text: 'kategorie',
-      to: '/categories/all',
-   },
-   {
-      text: 'zaloguj się',
-      to: '/login',
-   },
-   {
-      text: 'zarejestruj się',
-      to: '/register',
-   },
-];
-
 const NavLinks = () => {
+   const { isLoggedIn, userId, logout } = useContext(AuthContext);
+
+   const loggedInNavlinks = [
+      {
+         text: 'ranking',
+         to: '/ranks',
+      },
+      {
+         text: 'Zadania',
+         to: '/tasks/all',
+      },
+      {
+         text: 'Historia rozwiązań',
+         to: '/solution-history',
+      },
+      {
+         text: 'Wyloguj się',
+         to: '#',
+         onClick: logout,
+      },
+   ];
+
+   const notLoggedInNavlinks = [
+      {
+         text: 'ranking',
+         to: '/ranks',
+      },
+      {
+         text: 'zaloguj się',
+         to: '/login',
+      },
+      {
+         text: 'zarejestruj się',
+         to: '/register',
+      },
+   ];
+
+   const navlinks = isLoggedIn ? loggedInNavlinks : notLoggedInNavlinks;
+
    return (
       <ul className="nav-links">
          {navlinks.map((navlink) => (
             <li key={navlink.text}>
                <NavLink
+                  onClick={navlink.onClick}
                   to={navlink.to}
                   isActive={(match, location) => {
                      if (
-                        location.pathname.indexOf('categories') > -1 &&
-                        navlink.to === '/categories/all'
+                        location.pathname.indexOf('tasks') > -1 &&
+                        navlink.to === '/tasks/all'
                      ) {
                         return true;
                      } else {
@@ -44,6 +68,14 @@ const NavLinks = () => {
                </NavLink>
             </li>
          ))}
+         {isLoggedIn && (
+            <>
+               <li className="user-profile">
+                  <span className="user-profile__greetings">{userId}</span>
+                  <i class="fa-solid fa-user"></i>
+               </li>
+            </>
+         )}
       </ul>
    );
 };

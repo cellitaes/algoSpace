@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useHttpClient } from '../../shared/hooks/httpHook';
 
@@ -7,20 +7,37 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 
 import './Categories.css';
+import { AuthContext } from '../../shared/context/AuthContext.js';
 import { URL } from '../../config';
+
+const initCategory = {
+   categoryId: 'ALL',
+   translation: 'Wszystkie',
+};
 
 const Categories = () => {
    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+   const { token } = useContext(AuthContext);
 
-   const [categories, setCategories] = useState([
-      { categoryId: 'ALL', translation: 'Wszystkie' },
-   ]);
+   const [categories, setCategories] = useState([initCategory]);
 
    useEffect(() => {
       const getCategories = async () => {
          const url = `${URL}/categories`;
-         const fetchedCategories = await sendRequest(url);
-         setCategories([...categories, ...fetchedCategories]);
+         const method = 'GET';
+         const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+         };
+         const body = null;
+
+         const fetchedCategories = await sendRequest(
+            url,
+            method,
+            body,
+            headers
+         );
+         setCategories([initCategory, ...fetchedCategories.data]);
       };
       getCategories();
    }, []);
@@ -37,16 +54,14 @@ const Categories = () => {
                         key={cat.categoryId}
                         className="categories-list__item"
                      >
-                        <NavLink
-                           to={`/categories/${cat.categoryId.toLowerCase()}`}
-                        >
+                        <NavLink to={`/tasks/${cat.categoryId.toLowerCase()}`}>
                            {cat.translation}
                         </NavLink>
                      </div>
                   ))}
                </div>
                <div className="category-tasks">
-                  <Category />
+                  <Category categories={categories} />
                </div>
             </div>
          </div>

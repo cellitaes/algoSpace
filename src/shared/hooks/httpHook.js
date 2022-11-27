@@ -3,26 +3,36 @@ import { useState, useCallback } from 'react';
 export const useHttpClient = () => {
    const [isLoading, setIsLoading] = useState(false);
    const [error, setError] = useState();
+   const [errorCode, setErrorCode] = useState(null);
 
    const sendRequest = useCallback(
       async (url, method = 'GET', body = null, headers = {}) => {
+         setErrorCode(null);
          setIsLoading(true);
 
          try {
-            const response = await fetch(url, {
+            let response = await fetch(url, {
                method,
                body,
                headers,
             });
 
-            const responseData = await response.json();
+            let responseData = {};
+            try {
+               responseData = await response.json();
+            } catch (err) {}
 
+            setErrorCode(response.status);
             if (!response.ok) {
                throw new Error(responseData.message);
             }
 
             setIsLoading(false);
-            return responseData;
+            return {
+               data: responseData,
+               status: response.status,
+               ok: response.ok,
+            };
          } catch (err) {
             setError(err.message);
             setIsLoading(false);
@@ -36,5 +46,5 @@ export const useHttpClient = () => {
       setError(null);
    };
 
-   return { isLoading, error, sendRequest, clearError };
+   return { isLoading, error, errorCode, sendRequest, clearError };
 };

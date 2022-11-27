@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useReducer } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 
@@ -14,9 +14,11 @@ import Hints from '../components/Hints';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 
+import { AuthContext } from '../../shared/context/AuthContext.js';
 import { useHttpClient } from '../../shared/hooks/httpHook';
-import { useModal } from '../../shared/hooks/modalHook';
+import { usePopUp } from '../../shared/hooks/modalHook';
 import { useSlider } from '../../shared/hooks/slideHook';
+import { useCallback } from 'react';
 
 const changeLanguageContent =
    'Czy na pewno chcesz zmienić język? Spowoduje to nieodwracalne utracenie aktualnych zmian.';
@@ -53,11 +55,6 @@ const manageTaskState = (state, action) => {
             ...state,
             language: action.language,
          };
-      case 'SET_OUPUT':
-         return {
-            ...state,
-            showOutput: action.showOutput,
-         };
       case 'SET_DESCRIPTIONMODE':
          return {
             ...state,
@@ -91,9 +88,9 @@ const Task = () => {
       code: '',
       descriptionMode: true,
       showOutput: false,
-      left: '40%',
-      introWidth: '40%',
-      editorWidth: '60%',
+      left: '40',
+      introWidth: '40',
+      editorWidth: '60',
    };
 
    const [tableState, dispatchTaskState] = useReducer(
@@ -114,39 +111,75 @@ const Task = () => {
    } = tableState;
 
    const { isLoading, error, sendRequest, clearError } = useHttpClient();
-   const { open, openModal, closeModal } = useModal();
+   const [open, openModal, closeModal] = usePopUp();
    const { dragging, handleMove, startDragging, stopDragging } = useSlider();
+   const { token } = useContext(AuthContext);
+
+   const searchForTemplateCode = useCallback(
+      (task) => {
+         const template = task?.templates?.find(
+            ({ language: templateLanguage }) =>
+               templateLanguage.toLowerCase() === language.value.toLowerCase()
+         );
+         return template;
+      },
+      [language?.value]
+   );
 
    useEffect(() => {
       const getTaskById = async () => {
          const url = `${URL}/tasks/${taskId}`;
-         const data = await sendRequest(url);
-         const template = searchForTemplateCode(data);
+         const method = 'GET';
+         const body = null;
+         const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+         };
 
-         dispatchTaskState({ type: 'SET_TASK', task: data });
+         const data = await sendRequest(url, method, body, headers);
+         const template = searchForTemplateCode(data.data);
+
+         dispatchTaskState({ type: 'SET_TASK', task: data.data });
          if (!template.content) return;
          dispatchTaskState({ type: 'CODE_CHANGE', code: template.content });
       };
       getTaskById();
-   }, []);
+   }, [searchForTemplateCode, sendRequest, taskId, token]);
 
    useEffect(() => {
       const template = searchForTemplateCode(task);
       if (!template?.content) return;
       setNewLangAndChangeCode(template);
-   }, [language]);
-
-   const searchForTemplateCode = (task) => {
-      const template = task?.templates?.find(
-         ({ language: templateLanguage }) =>
-            templateLanguage.toLowerCase() === language.value.toLowerCase()
-      );
-      return template;
-   };
+   }, [language, searchForTemplateCode, task]);
 
    const handleEditorChange = (value) => {
       dispatchTaskState({ type: 'CODE_CHANGE', code: value });
    };
+
+   const handleResize = () => {
+      if (window.innerWidth < 1024)
+         dispatchTaskState({
+            type: 'SET_NEW_WIDTH',
+            editorWidth: '100%',
+            left: '40',
+            introWidth: '40',
+         });
+      if (window.innerWidth >= 1024 && editorWidth === '60') {
+         dispatchTaskState({
+            type: 'SET_NEW_WIDTH',
+            left: '40',
+            introWidth: '40',
+            editorWidth: '60',
+         });
+      }
+   };
+
+   useEffect(() => {
+      window.addEventListener('resize', handleResize);
+      return () => {
+         window.removeEventListener('resize', handleResize);
+      };
+   }, []);
 
    const handleThemeChange = async (theme) => {
       await new Promise((res) => {
@@ -202,10 +235,6 @@ const Task = () => {
          editorWidth: 100 - introductionWidth,
          left: introductionWidth,
       });
-   };
-
-   const toggleOutputState = () => {
-      dispatchTaskState({ type: 'SET_OUPUT', showOutput: !showOutput });
    };
 
    const changeDescriptionMode = (descMode) => {
@@ -280,8 +309,10 @@ const Task = () => {
             <div
                className="task-container__code-editor"
                style={{
-                  width: `${editorWidth}%`,
-                  flexBasis: `${editorWidth}%`,
+                  width: `${window.innerWidth < 1024 ? '100' : editorWidth}%`,
+                  flexBasis: `${
+                     window.innerWidth < 1024 ? '100' : editorWidth
+                  }%`,
                }}
             >
                <CodeEditor
@@ -294,7 +325,6 @@ const Task = () => {
                   handleEditorChange={handleEditorChange}
                   code={code}
                   showOutput={showOutput}
-                  toggleOutputState={toggleOutputState}
                />
             </div>
          </div>
