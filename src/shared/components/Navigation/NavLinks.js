@@ -1,6 +1,8 @@
 import React from 'react';
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import { AuthContext } from '../../context/AuthContext';
 
@@ -72,7 +74,7 @@ const NavLinks = () => {
             <>
                <li className="user-profile">
                   <span className="user-profile__greetings">{userId}</span>
-                  <i class="fa-solid fa-user"></i>
+                  <FontAwesomeIcon icon={faUser} />
                </li>
             </>
          )}

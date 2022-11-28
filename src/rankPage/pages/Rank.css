@@ -1,9 +1,11 @@
-.rank-wrapper {
+.rank-wrapper,
+.solution-wrapper {
    background-color: #aaa;
    flex: 1;
 }
 
-.rank {
+.rank,
+.solution-history {
    margin: 5vh 3vw;
    overflow-x: auto;
 }
@@ -87,17 +89,28 @@ table tr td ul li {
 }
 
 @media (min-width: 1024px) {
-   .rank {
+   .rank,
+   .solution-history {
       overflow-x: inherit;
    }
 
    table {
       width: 100%;
       box-shadow: 15px 15px 20px 5px black;
-      width: 75%;
    }
 
    .pagination-container {
-      width: 75%;
+      width: 100%;
+   }
+}
+
+@media (min-width: 1366px) {
+   table {
+      max-width: 1200px;
+      margin: 0 auto;
+   }
+
+   .pagination-container {
+      max-width: 1200px;
    }
 }
