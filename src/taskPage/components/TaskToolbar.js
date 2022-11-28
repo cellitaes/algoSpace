@@ -1,6 +1,8 @@
 import { useState, useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import Select from 'react-select';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLeftLong, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../../shared/components/FormElements/Button';
 import ConfirmationModal from '../../shared/components/Modals/ConfirmationModal';
@@ -28,6 +30,8 @@ const TaskToolbar = ({
    displayNone,
    code,
 }) => {
+   const [submissionResult, setSubmissionResult] = useState(null);
+
    const history = useHistory();
    const { taskId } = useParams();
 
@@ -65,12 +69,20 @@ const TaskToolbar = ({
          Authorization: `Bearer ${token}`,
       };
 
-      await sendRequest(url, method, body, headers);
+      const response = await sendRequest(url, method, body, headers);
+      setSubmissionResult(response);
    };
 
    useEffect(() => {
       switch (errorCode) {
          case 200:
+            if (!submissionResult.data) {
+               setIsCorrect(false);
+               setTaskSolutionPopUpContent(
+                  'Zadanie nie zostało rozwiązane poprawnie :(. Spróbuj ponowanie.'
+               );
+               break;
+            }
             setIsCorrect(true);
             setTaskSolutionPopUpContent(
                'Zadanie zostało poprawnie rozwiązane!'
@@ -89,7 +101,12 @@ const TaskToolbar = ({
       }
 
       if (errorCode) openTaskSolutionModal();
-   }, [errorCode, openTaskSolutionModal, setTaskSolutionPopUpContent]);
+   }, [
+      errorCode,
+      openTaskSolutionModal,
+      setTaskSolutionPopUpContent,
+      submissionResult,
+   ]);
 
    return (
       <>
@@ -97,7 +114,11 @@ const TaskToolbar = ({
          {error && <ErrorModal error={error} onClear={clearError} />}
          {openTaskSolution && (
             <Modal
-               onCancel={isCorrect ? history.go(-2) : closeTaskSolutionModal}
+               onCancel={
+                  isCorrect
+                     ? () => history.push('/tasks/all')
+                     : closeTaskSolutionModal
+               }
                header={`Twoje rozwiązanie jest ${
                   isCorrect ? 'poprawne' : 'niepoprawne'
                }`}
@@ -127,10 +148,10 @@ const TaskToolbar = ({
          <div className={`toolbar ${displayNone && 'display-none'}`}>
             <div className="toolbar__options">
                <Button size="xs" onClick={openQuitPageModal}>
-                  <i class="fa-solid fa-left-long"></i>
+                  <FontAwesomeIcon icon={faLeftLong} />
                </Button>
                <Button size="xs" inverse onClick={checkSolution}>
-                  <i class="fa-solid fa-check"></i>
+                  <FontAwesomeIcon icon={faCheck} />
                   {` Sprawdź rozwiązanie`}
                </Button>
             </div>

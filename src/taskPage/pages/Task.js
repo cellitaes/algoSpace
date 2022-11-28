@@ -1,6 +1,11 @@
 import { useContext, useEffect } from 'react';
 import { useReducer } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+   faChevronLeft,
+   faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 
 import { loader } from '@monaco-editor/react';
 import monacoThemes from 'monaco-themes/themes/themelist';
@@ -294,15 +299,18 @@ const Task = () => {
                />
             </div>
             <div>
-               <div class="slider-task__divider" style={{ left: `${left}%` }}>
+               <div
+                  className="slider-task__divider"
+                  style={{ left: `${left}%` }}
+               >
                   <div
-                     class="slider-task__handle"
+                     className="slider-task__handle"
                      onMouseDown={startDragging}
                      onTouchStart={startDragging}
                      onMouseUp={stopDragging}
                   >
-                     <i class="fa fa-chevron-left"></i>
-                     <i class="fa fa-chevron-right"></i>
+                     <FontAwesomeIcon icon={faChevronLeft} />
+                     <FontAwesomeIcon icon={faChevronRight} />
                   </div>
                </div>
             </div>

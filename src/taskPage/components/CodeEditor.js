@@ -3,6 +3,15 @@ import { useHistory } from 'react-router-dom';
 import Editor from '@monaco-editor/react';
 import monacoThemes from 'monaco-themes/themes/themelist';
 import Select from 'react-select';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+   faPlay,
+   faGear,
+   faDownLeftAndUpRightToCenter,
+   faUpRightAndDownLeftFromCenter,
+   faChevronUp,
+   faChevronDown,
+} from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../../shared/components/FormElements/Button';
 import ConfirmationModal from '../../shared/components/Modals/ConfirmationModal';
@@ -30,14 +39,14 @@ const CodeEditor = ({
 }) => {
    const navigation = document.querySelector('.main-header');
    const toolbar = document.querySelector('.minimalize-editor');
-   const heightOffset = navigation?.offsetHeight + toolbar?.offsetHeight;
+   let heightOffset = navigation?.offsetHeight + toolbar?.offsetHeight;
    const windowHeight = window.innerHeight;
 
    const { handleMove, startDragging, stopDragging, dragging } = useSlider();
 
-   const [top, setTop] = useState();
-   const [outputHeight, setOutpuHeight] = useState();
-   const [editorHeight, setEditorHeight] = useState();
+   const [top, setTop] = useState(0);
+   const [outputHeight, setOutpuHeight] = useState(0);
+   const [editorHeight, setEditorHeight] = useState(0);
 
    const history = useHistory();
    const [openQuitModal, setOpenQuitModal] = useState(false);
@@ -70,6 +79,10 @@ const CodeEditor = ({
    );
 
    useEffect(() => {
+      if (isNaN(heightOffset)) {
+         heightOffset = 0;
+      }
+
       setOutpuHeight(200);
       setEditorHeight(windowHeight - heightOffset - 200);
       setTop(windowHeight - heightOffset - 200);
@@ -148,7 +161,7 @@ const CodeEditor = ({
                }`}
             >
                <Button size="xs" onClick={handleCodeCompile}>
-                  <i class="fa-solid fa-play"></i>
+                  <FontAwesomeIcon icon={faPlay} />
                </Button>
                <div
                   className={`minimalize-editor__settings ${
@@ -156,10 +169,10 @@ const CodeEditor = ({
                   }`}
                >
                   <Button size="xs" onClick={() => setOpenSettings(true)}>
-                     <i class="fa-solid fa-gear"></i>
+                     <FontAwesomeIcon icon={faGear} />
                   </Button>
                   <Button size="xs" onClick={() => changeDescriptionMode(true)}>
-                     <i class="fa-solid fa-down-left-and-up-right-to-center"></i>
+                     <FontAwesomeIcon icon={faDownLeftAndUpRightToCenter} />
                   </Button>
                </div>
             </div>
@@ -169,32 +182,33 @@ const CodeEditor = ({
                      size="sm"
                      onClick={() => changeDescriptionMode(false)}
                   >
-                     <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+                     <FontAwesomeIcon
+                        icon={faUpRightAndDownLeftFromCenter}
+                        style={{ marginRight: '10px' }}
+                     />
                      Edytuj kod
                   </Button>
                )}
-
                <div className="code-editor-container">
                   <div style={{ height: editorHeight }}>
                      <Editor
                         className="code-editor"
                         theme={theme.value}
-                        height={'100%'}
                         code={code}
                         language={language?.value}
                         defaultValue={code}
                         onChange={handleEditorChange}
                      />
                   </div>
-                  <div class="slider__divider" style={{ top: top }}>
+                  <div className="slider__divider" style={{ top: top }}>
                      <div
-                        class="slider__handle"
+                        className="slider__handle"
                         onMouseDown={startDragging}
                         onTouchStart={startDragging}
                         onMouseUp={stopDragging}
                      >
-                        <i class="fa fa-chevron-up"></i>
-                        <i class="fa fa-chevron-down"></i>
+                        <FontAwesomeIcon icon={faChevronUp} />
+                        <FontAwesomeIcon icon={faChevronDown} />
                      </div>
                   </div>
                   <Output

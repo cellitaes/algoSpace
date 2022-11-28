@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { URL } from '../../config';
 import Select from 'react-select';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLeftLong } from '@fortawesome/free-solid-svg-icons';
 
 import { customStyles } from '../components/SelectCustomStyles';
 import './ConfirmChoice.css';
@@ -58,7 +60,7 @@ const ConfirmChoice = () => {
             <div className="confirmation-page__layout">
                <div className="confirmation-page__goback-btn">
                   <Button size="sm" onClick={() => history.goBack()}>
-                     <i class="fa-solid fa-left-long"></i>
+                     <FontAwesomeIcon icon={faLeftLong} />
                      <span>Powrót</span>
                   </Button>
                </div>

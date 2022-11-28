@@ -123,7 +123,7 @@
       background: rgba(255, 255, 255, 0.75);
    }
 
-   .slider-task__handle i {
+   .slider-task__handle svg {
       position: static;
    }
 }

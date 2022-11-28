@@ -3,6 +3,12 @@ import ReactPaginate from 'react-paginate';
 import { NavLink, useParams } from 'react-router-dom';
 import { useHttpClient } from '../../shared/hooks/httpHook';
 import usePagination from '../../shared/hooks/paginationHook.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+   faAngleRight,
+   faAngleLeft,
+   faCircleCheck,
+} from '@fortawesome/free-solid-svg-icons';
 
 import { URL } from '../../config';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
@@ -72,11 +78,11 @@ const Category = ({ categories }) => {
             <ReactPaginate
                className="category-pagination"
                breakLabel="..."
-               nextLabel={<i class="fa-solid fa-angle-right"></i>}
+               nextLabel={<FontAwesomeIcon icon={faAngleRight} />}
                onPageChange={handlePageClick}
                pageRangeDisplayed={1}
                pageCount={maxPage}
-               previousLabel={<i class="fa-solid fa-angle-left"></i>}
+               previousLabel={<FontAwesomeIcon icon={faAngleLeft} />}
                renderOnZeroPageCount={null}
                forcePage={currentPage}
             />
@@ -91,7 +97,7 @@ const Category = ({ categories }) => {
                      <div className="task__name">{task.name}</div>
                      {task.done && (
                         <div className="task__done">
-                           <i class="fa-solid fa-circle-check"></i>
+                           <FontAwesomeIcon icon={faCircleCheck} />
                         </div>
                      )}
                   </NavLink>

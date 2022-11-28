@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { useHttpClient } from '../../shared/hooks/httpHook';
 import usePagination from '../../shared/hooks/paginationHook';
@@ -40,11 +42,11 @@ const Rank = () => {
                   <ReactPaginate
                      className="rank-pagination "
                      breakLabel="..."
-                     nextLabel={<i class="fa-solid fa-angle-right"></i>}
+                     nextLabel={<FontAwesomeIcon icon={faAngleRight} />}
                      onPageChange={handlePageClick}
                      pageRangeDisplayed={1}
                      pageCount={maxPage}
-                     previousLabel={<i class="fa-solid fa-angle-left"></i>}
+                     previousLabel={<FontAwesomeIcon icon={faAngleLeft} />}
                      renderOnZeroPageCount={null}
                      forcePage={currentPage}
                   />
@@ -60,7 +62,7 @@ const Rank = () => {
                   <tbody>
                      {currentData.map((rank, idx) => {
                         return (
-                           <tr>
+                           <tr key={idx}>
                               <td className="row-place">{idx + 1}</td>
                               <td className="row-username">{rank.username}</td>
                               <td className="row-points">{rank.points}</td>

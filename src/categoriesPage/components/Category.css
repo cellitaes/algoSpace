@@ -18,14 +18,16 @@
    margin: 1rem 0;
 }
 
-.rank-pagination {
+.rank-pagination,
+.solution-pagination {
    text-align: left;
    margin-left: auto;
    margin-bottom: 2vh;
 }
 
 .category-pagination,
-.rank-pagination {
+.rank-pagination,
+.solution-pagination {
    list-style: none;
    display: flex;
    justify-content: center;
@@ -36,7 +38,8 @@
 }
 
 .category-pagination li,
-.rank-pagination li {
+.rank-pagination li,
+.solution-pagination li {
    flex-basis: 40px;
    margin: 0 0.25rem;
    cursor: pointer;
@@ -44,12 +47,14 @@
 }
 
 .category-pagination li a,
-.rank-pagination li a {
+.rank-pagination li a,
+.solution-pagination li a {
    padding: 5px 10px;
 }
 
 .category-pagination .selected,
-.rank-pagination .selected {
+.rank-pagination .selected,
+.solution-pagination .selected {
    flex-basis: 2rem;
    height: 2rem;
    background-color: #e8ff08;
@@ -61,7 +66,8 @@
 }
 
 .category-pagination .previous,
-.rank-pagination .previous {
+.rank-pagination .previous,
+.solution-pagination .previous {
    flex-basis: 20%;
    border-right: 2px solid #e8ff08;
    margin-right: auto;
@@ -69,20 +75,23 @@
 }
 
 .category-pagination .next,
-.rank-pagination .next {
+.rank-pagination .next,
+.solution-pagination .next {
    flex-basis: 20%;
    border-left: 2px solid #e8ff08;
    margin-left: auto;
    height: 100%;
 }
 
-.category-pagination .previous a i,
-.rank-pagination .previous a i {
+.category-pagination .previous a svg,
+.rank-pagination .previous a svg,
+.solution-pagination .previous a svg {
    padding: 0.6rem 0.8rem;
 }
 
-.category-pagination .next a i,
-.rank-pagination .next a i {
+.category-pagination .next a svg,
+.rank-pagination .next a svg,
+.solution-pagination .next a svg {
    padding: 0.6rem 0.8rem;
 }
 
@@ -142,13 +151,15 @@
 
 @media (min-width: 568px) {
    .category-pagination,
-   .rank-pagination {
+   .rank-pagination,
+   .solution-pagination {
       font-size: 1.5rem;
       height: 40px;
    }
 
    .category-pagination .selected,
-   .rank-pagination .selected {
+   .rank-pagination .selected,
+   .solution-pagination .selected {
       flex-basis: 2.5rem;
    }
 
@@ -169,7 +180,9 @@
    .category-pagination .next,
    .category-pagination .previous,
    .rank-pagination .next,
-   .rank-pagination .previous {
+   .rank-pagination .previous,
+   .solution-pagination .next,
+   .solution-pagination .previous {
       flex-basis: 5rem;
    }
 }
