@@ -1,0 +1,18 @@
+.code-container {
+   background-color: #eee;
+   flex: 1;
+}
+
+.code-container button {
+   position: absolute;
+   top: 10vh;
+   left: 2vw;
+   z-index: 2;
+}
+
+.code-content {
+   margin: 0 auto;
+   max-width: 1000px;
+   margin-top: 6vh;
+   padding: 0 2vw;
+}
