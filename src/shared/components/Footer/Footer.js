@@ -6,23 +6,23 @@ import '../../util/css/Paragraph.css';
 const noMore = [
    {
       textId: 1,
-      text: 'Nigdy więcej wiadomości, które zostają zignorowane.',
+      text: 'Koniec z szukaniem platformy z zadaniami do nauki programowania.',
    },
    {
       textId: 2,
-      text: 'Nigdy więcej nieprzespanych i zarawanych nocy.',
+      text: 'Podział na kategorie oraz poziom trudności sprawia, że każdy znajdzie u nas coś dla siebie.',
    },
    {
       textId: 3,
-      text: 'Nigdy więcej podań o pracę, na które nikt nie zwraca uwagi.',
+      text: 'Szybka kompilacja kodu pozwala zauważyć błędy w kodzie.',
    },
    {
       textId: 4,
-      text: 'Nigdy więcej uczucia bezradności w trakcie rozmowy rekrutacyjnej.',
+      text: 'Dostęp do dobrych rozwiązań o każdej porze dnia i nocy.',
    },
    {
       textId: 5,
-      text: 'Nigdy więcej zadań kwalifikacyjnych, których nie potrafisz rozwiązań.',
+      text: 'Dzięki rankingowi poczuć można nutkę rywalizacji i dreszczu emocji.',
    },
 ];
 

@@ -116,7 +116,7 @@ const Task = () => {
    } = tableState;
 
    const { isLoading, error, sendRequest, clearError } = useHttpClient();
-   const [open, openModal, closeModal] = usePopUp();
+   const { open, openModal, closeModal } = usePopUp();
    const { dragging, handleMove, startDragging, stopDragging } = useSlider();
    const { token } = useContext(AuthContext);
 

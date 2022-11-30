@@ -6,6 +6,7 @@
 .confirmation-page__layout {
    position: relative;
    max-width: 1024px;
+   margin: 4vh 0;
 }
 
 .confirmation-page__goback-btn button {

@@ -25,7 +25,7 @@ const SubmissionCode = () => {
 
    useEffect(() => {
       const getCode = async () => {
-         const url = `${URL}/solution/task/{taskId}/{user}?taskId=${taskId}&user=${userId}`;
+         const url = `${URL}/solution/task/${taskId}/${userId}`;
          const method = 'GET';
          const body = null;
          const headers = {
@@ -51,6 +51,7 @@ const SubmissionCode = () => {
             <div
                className="code-content"
                dangerouslySetInnerHTML={{ __html: taskData?.content }}
+               style={{ whiteSpace: 'pre-wrap' }}
             />
          </div>
       </>

@@ -54,8 +54,13 @@ const AuthForm = () => {
 
    const { isLoading, error, errorCode, sendRequest, clearError } =
       useHttpClient();
-   const [open, content, setPopUpContent, openSnackbar, closeSnackbar] =
-      usePopUp();
+   const {
+      open,
+      content,
+      setPopUpContent,
+      openModal: openSnackbar,
+      closeModal: closeSnackbar,
+   } = usePopUp();
    const { blockScroll, allowScroll } = useScrollBlock();
 
    const isRegistration = location.pathname === '/register';

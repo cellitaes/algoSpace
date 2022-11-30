@@ -61,7 +61,7 @@ const SolutionHistory = () => {
 
    useEffect(() => {
       const getSolutionHistory = async () => {
-         const url = `${URL}/solution/all/{user}?user=${userId}`;
+         const url = `${URL}/solution/all/${userId}`;
          const method = 'GET';
          const body = null;
          const headers = {
@@ -113,24 +113,34 @@ const SolutionHistory = () => {
                      {currentData.map((sol, idx) => {
                         return (
                            <tr key={idx}>
-                              <td className="row-place">{idx + 1}</td>
-                              <td className="row-name">{sol.name}</td>
-                              <td className="row-difficulty">
-                                 {sol.difficulty}
+                              <td className="row-place">
+                                 {sol.taskGeneralInfo?.id}
                               </td>
-                              <td className="row-language">{sol.language}</td>
-                              <td className="row-category">{sol.category}</td>
+                              <td className="row-name">
+                                 {sol.taskGeneralInfo?.name}
+                              </td>
+                              <td className="row-difficulty">
+                                 {sol.taskGeneralInfo?.difficulty?.translation}
+                              </td>
+                              <td className="row-language">
+                                 {sol.language?.translation}
+                              </td>
+                              <td className="row-category">
+                                 {sol.taskGeneralInfo?.category?.translation}
+                              </td>
                               <td className="row-date">
-                                 {new Date(
+                                 {`${new Date(
                                     sol.submissionDate
-                                 ).toLocaleDateString()}
+                                 ).toLocaleDateString()} ${new Date(
+                                    sol.submissionDate
+                                 ).toLocaleTimeString()}`}
                               </td>
                               <td className="row-show-solution">
                                  <Button
                                     className="xs"
                                     onClick={() => {
                                        history.push(
-                                          `/task-submission/${sol.taskId}/${sol.solverUsername}`
+                                          `/task-submission/${sol.taskGeneralInfo?.id}/${sol.solverUsername}`
                                        );
                                     }}
                                  >

@@ -15,14 +15,14 @@
    width: 100%;
    height: 100%;
    background-color: rgba(0, 0, 0, 0.75);
-   z-index: 2;
+   z-index: 4;
 }
 
 .none-edit button {
    position: absolute;
    top: 1rem;
    right: 0;
-   z-index: 3;
+   z-index: 5;
    font-weight: bold;
 }
 
@@ -42,7 +42,7 @@
 
 .editor {
    position: fixed;
-   top: 11vh;
+   top: 12vh;
    left: 0;
    width: 100%;
 }
@@ -113,13 +113,18 @@
    transform: rotateX(360deg);
 }
 
+.icon-name {
+   font-weight: bold;
+   margin-left: 10px;
+}
+
 @media (min-width: 568px) {
    .minimalize-editor {
       height: 3rem;
    }
 
    .editor {
-      top: 13vh;
+      top: 14vh;
    }
 }
 

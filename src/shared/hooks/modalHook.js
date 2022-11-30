@@ -17,5 +17,5 @@ export const usePopUp = () => {
       setContent(text);
    }, []);
 
-   return [open, content, setPopUpContent, openModal, closeModal];
+   return { open, content, setPopUpContent, openModal, closeModal };
 };

@@ -42,6 +42,19 @@
    justify-content: space-between;
 }
 
+.solution-icon {
+   text-align: center;
+   font-size: 100px;
+}
+
+.solution-icon--success-color {
+   color: #28a745;
+}
+
+.solution-icon--danger-color {
+   color: #dc3545;
+}
+
 @media (min-width: 768px) {
    .toolbar__tabs {
       justify-content: right;

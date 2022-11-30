@@ -2,7 +2,12 @@ import { useState, useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLeftLong, faCheck } from '@fortawesome/free-solid-svg-icons';
+import {
+   faLeftLong,
+   faCheck,
+   faCircleXmark,
+   faCircleCheck,
+} from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../../shared/components/FormElements/Button';
 import ConfirmationModal from '../../shared/components/Modals/ConfirmationModal';
@@ -35,20 +40,18 @@ const TaskToolbar = ({
    const history = useHistory();
    const { taskId } = useParams();
 
-   const [
-      openQuitPage,
-      quitPagContent,
-      setQuitPagPopUpContent,
-      openQuitPageModal,
-      closeQuitPageModal,
-   ] = usePopUp();
-   const [
-      openTaskSolution,
-      taskSolutionContent,
-      setTaskSolutionPopUpContent,
-      openTaskSolutionModal,
-      closeTaskSolutionModal,
-   ] = usePopUp();
+   const {
+      open: openQuitPage,
+      openModal: openQuitPageModal,
+      closeModal: closeQuitPageModal,
+   } = usePopUp();
+   const {
+      open: openTaskSolution,
+      content: taskSolutionContent,
+      setPopUpContent: setTaskSolutionPopUpContent,
+      openModal: openTaskSolutionModal,
+      closeModal: closeTaskSolutionModal,
+   } = usePopUp();
    const { isLoading, error, errorCode, sendRequest, clearError } =
       useHttpClient();
    const { token, userId } = useContext(AuthContext);
@@ -78,15 +81,9 @@ const TaskToolbar = ({
          case 200:
             if (!submissionResult.data) {
                setIsCorrect(false);
-               setTaskSolutionPopUpContent(
-                  'Zadanie nie zostało rozwiązane poprawnie :(. Spróbuj ponowanie.'
-               );
                break;
             }
             setIsCorrect(true);
-            setTaskSolutionPopUpContent(
-               'Zadanie zostało poprawnie rozwiązane!'
-            );
             break;
          case 500:
             setIsCorrect(false);
@@ -94,9 +91,6 @@ const TaskToolbar = ({
             break;
          default:
             setIsCorrect(false);
-            setTaskSolutionPopUpContent(
-               'Zadanie nie zostało rozwiązane poprawnie :(. Spróbuj ponowanie.'
-            );
             break;
       }
 
@@ -114,11 +108,6 @@ const TaskToolbar = ({
          {error && <ErrorModal error={error} onClear={clearError} />}
          {openTaskSolution && (
             <Modal
-               onCancel={
-                  isCorrect
-                     ? () => history.push('/tasks/all')
-                     : closeTaskSolutionModal
-               }
                header={`Twoje rozwiązanie jest ${
                   isCorrect ? 'poprawne' : 'niepoprawne'
                }`}
@@ -135,7 +124,22 @@ const TaskToolbar = ({
                   </Button>
                }
             >
-               {taskSolutionContent}
+               {
+                  <>
+                     {taskSolutionContent}
+                     <p
+                        className={`solution-icon solution-icon--${
+                           isCorrect ? 'success-color' : 'danger-color'
+                        }`}
+                     >
+                        {isCorrect ? (
+                           <FontAwesomeIcon icon={faCircleCheck} />
+                        ) : (
+                           <FontAwesomeIcon icon={faCircleXmark} />
+                        )}
+                     </p>
+                  </>
+               }
             </Modal>
          )}
          <ConfirmationModal
@@ -149,10 +153,11 @@ const TaskToolbar = ({
             <div className="toolbar__options">
                <Button size="xs" onClick={openQuitPageModal}>
                   <FontAwesomeIcon icon={faLeftLong} />
+                  <span className="icon-name">Powrót</span>
                </Button>
                <Button size="xs" inverse onClick={checkSolution}>
                   <FontAwesomeIcon icon={faCheck} />
-                  {` Sprawdź rozwiązanie`}
+                  <span className="icon-name">Sprawdź rozwiązanie</span>
                </Button>
             </div>
             <div className="select-language">

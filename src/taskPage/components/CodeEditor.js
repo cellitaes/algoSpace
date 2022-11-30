@@ -5,7 +5,7 @@ import monacoThemes from 'monaco-themes/themes/themelist';
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-   faPlay,
+   faCode,
    faGear,
    faDownLeftAndUpRightToCenter,
    faUpRightAndDownLeftFromCenter,
@@ -15,7 +15,6 @@ import {
 
 import Button from '../../shared/components/FormElements/Button';
 import ConfirmationModal from '../../shared/components/Modals/ConfirmationModal';
-import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Output from './Output';
 
@@ -26,6 +25,7 @@ import { customStyles } from '../components/SelectCustomStyles';
 import { URL } from '../../config';
 import { useSlider } from '../../shared/hooks/slideHook';
 import { useEffect } from 'react';
+import { useHttpClient } from '../../shared/hooks/httpHook';
 
 const CodeEditor = ({
    theme,
@@ -42,6 +42,7 @@ const CodeEditor = ({
    let heightOffset = navigation?.offsetHeight + toolbar?.offsetHeight;
    const windowHeight = window.innerHeight;
 
+   const { sendRequest, error, clearError } = useHttpClient();
    const { handleMove, startDragging, stopDragging, dragging } = useSlider();
 
    const [top, setTop] = useState(0);
@@ -101,13 +102,8 @@ const CodeEditor = ({
          Authorization: `Bearer ${token}`,
       };
 
-      await fetch(url, {
-         method,
-         body,
-         headers,
-      })
-         .then((res) => res.text())
-         .then((res) => setCodeExecutionRes(res));
+      const response = await sendRequest(url, method, body, headers);
+      setCodeExecutionRes(response.data.feedbackMessage);
    };
 
    const checkSliderPosition = (clientY) => {
@@ -133,6 +129,7 @@ const CodeEditor = ({
 
    return (
       <>
+         {error && <ErrorModal error={error} onClear={clearError} />}
          <ConfirmationModal
             show={openQuitModal}
             content={quitContent}
@@ -161,7 +158,8 @@ const CodeEditor = ({
                }`}
             >
                <Button size="xs" onClick={handleCodeCompile}>
-                  <FontAwesomeIcon icon={faPlay} />
+                  <FontAwesomeIcon icon={faCode} />
+                  <span className="icon-name">Skompiluj</span>
                </Button>
                <div
                   className={`minimalize-editor__settings ${
@@ -170,6 +168,7 @@ const CodeEditor = ({
                >
                   <Button size="xs" onClick={() => setOpenSettings(true)}>
                      <FontAwesomeIcon icon={faGear} />
+                     <span className="icon-name">Ustawienia</span>
                   </Button>
                   <Button size="xs" onClick={() => changeDescriptionMode(true)}>
                      <FontAwesomeIcon icon={faDownLeftAndUpRightToCenter} />
