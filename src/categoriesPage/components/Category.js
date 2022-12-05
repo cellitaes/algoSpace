@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { NavLink, useParams } from 'react-router-dom';
 import { useHttpClient } from '../../shared/hooks/httpHook';
@@ -28,7 +28,20 @@ const Category = ({ categories }) => {
 
    const { category } = useParams();
 
-   const { token } = useContext(AuthContext);
+   const { token, userId } = useContext(AuthContext);
+
+   const getDoneTasks = useCallback(async () => {
+      const url = `${URL}/solution/all/${userId}`;
+      const method = 'GET';
+      const body = null;
+      const headers = {
+         'Content-Type': 'application/json',
+         Authorization: `Bearer ${token}`,
+      };
+
+      const response = await sendRequest(url, method, body, headers);
+      return response.data;
+   }, [userId, token, sendRequest]);
 
    useEffect(() => {
       const getTasksByParam = async () => {
@@ -41,10 +54,22 @@ const Category = ({ categories }) => {
          };
 
          const tasks = await sendRequest(url, method, body, headers);
-         setTasks(tasks.data);
+         const doneTasks = await getDoneTasks();
+
+         const mappedTasks = tasks.data.map((task) => {
+            const taskCopy = task;
+
+            taskCopy.done = !!doneTasks.find(
+               (t) => t.taskGeneralInfo.name === task.name
+            );
+
+            return taskCopy;
+         });
+
+         setTasks(mappedTasks);
       };
       getTasksByParam();
-   }, [sendRequest, setTasks, token]);
+   }, [sendRequest, setTasks, getDoneTasks, token]);
 
    useEffect(() => {
       resetPage();
