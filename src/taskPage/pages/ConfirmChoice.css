@@ -39,6 +39,14 @@
    font-weight: bold;
 }
 
+.task-summary__category {
+   text-transform: lowercase;
+}
+
+.task-summary__category::first-letter {
+   text-transform: uppercase;
+}
+
 .language-select {
    width: 60%;
    margin: 0 auto 1rem;

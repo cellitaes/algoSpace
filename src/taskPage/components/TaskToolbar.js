@@ -20,6 +20,7 @@ import './TaskToolbar.css';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import { AuthContext } from '../../shared/context/AuthContext.js';
+import { URL } from '../../config';
 
 const quitPageContent =
    'Czy na pewno chcesz opuścić stronę? Spowoduje to nieodwracalne utracenie aktualnych zmian.';
@@ -58,7 +59,7 @@ const TaskToolbar = ({
    const [isCorrect, setIsCorrect] = useState(false);
 
    const checkSolution = async () => {
-      const url = 'http://localhost:8080/solution/check';
+      const url = `${URL}/solution/check`;
       const method = 'POST';
       const body = JSON.stringify({
          submissionDate: new Date().toISOString(),

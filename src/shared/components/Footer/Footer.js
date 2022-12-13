@@ -53,7 +53,7 @@ const Footer = () => {
    return (
       <footer className="main-footer">
          <div className="footer__content">
-            <h2>Najlepszy sposób na naukę do rozmowy o pracę</h2>
+            <h2>Najlepszy sposób na naukę do nauki algorytmów</h2>
             <ul className="nomore">
                {noMore.map((nomore) => (
                   <li className="nomore__list-item" key={nomore.textId}>

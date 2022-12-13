@@ -14,6 +14,33 @@ import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import { AuthContext } from '../../shared/context/AuthContext.js';
 import { useHttpClient } from '../../shared/hooks/httpHook';
 
+const categoryTranslation = [
+   {
+      categoryId: 'ARRAYS',
+      translation: 'Tablice',
+   },
+   {
+      categoryId: 'STACKS',
+      translation: 'Stosy',
+   },
+   {
+      categoryId: 'RECURSION',
+      translation: 'Rekurencja',
+   },
+   {
+      categoryId: 'STRINGS',
+      translation: 'Ciągi znaków',
+   },
+   {
+      categoryId: 'SORTING',
+      translation: 'Sortowanie',
+   },
+   {
+      categoryId: 'OTHER',
+      translation: 'Inne',
+   },
+];
+
 const ConfirmChoice = () => {
    const history = useHistory();
    const { taskId } = useParams();
@@ -75,7 +102,14 @@ const ConfirmChoice = () => {
                      </p>
                      <p>
                         {`Kategoria: `}
-                        <span>{task.category?.toLowerCase()}</span>
+                        <span className="task-summary__category">
+                           {
+                              categoryTranslation.find(
+                                 (category) =>
+                                    category.categoryId === task.category
+                              )?.translation
+                           }
+                        </span>
                      </p>
                      <p>
                         {`Łatwość zdania: `}
