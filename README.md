@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# Algo space
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How to run app
 
-## Available Scripts
+### Firstly follow the instructions in README file placed in worker directory
 
-In the project directory, you can run:
+### Then execute below command in current directory
+```bash
+docker-compose up --build
+```
 
-### `npm start`
+## Visit Frontend by clicking on the link below
+[ALGO SPACE](http://localhost:3000/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## After execution of this command service is available through
+localhost:8080
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## And Mysql is available through
+localhost:3306
 
-### `npm test`
+### You can get API documentation by clicking on the link below
+[API documentation](http://localhost:8080/swagger-ui.html)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### If you want to run app locally in intellij execute below commands before start (it might take a while to start mysql, wait around 30 seconds)
+```bash
+docker run --name mysql -p 3306:3306 -e MYSQL_USER=algo_space -e MYSQL_ROOT_PASSWORD=pass -e MYSQL_PASSWORD=pass -e MYSQL_DATABASE=algo_space -d mysql:8.0.30
+```
+```bash
+docker run --name redis -p 6379:6379 --network=bridge -d redis:6.2
+```
+#### After executing above command, you can get to mysql client by executing below command  
+```bash
+docker exec -it mysql mysql -ualgo_space -ppass
+```
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
