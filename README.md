@@ -7,6 +7,7 @@
 ### Then execute below command in current directory
 ```bash
 docker-compose up --build
+docker pull algospacezpi/algospace-worker
 ```
 
 ## Visit Frontend by clicking on the link below
@@ -33,3 +34,11 @@ docker run --name redis -p 6379:6379 --network=bridge -d redis:6.2
 docker exec -it mysql mysql -ualgo_space -ppass
 ```
 
+## How to update backend
+
+### Execute below commands from current directory
+```bash
+docker login -u algospacezpi -p algospace123$
+docker build -t algospacezpi/algospace-backend .
+docker push algospacezpi/algospace-backend
+```
