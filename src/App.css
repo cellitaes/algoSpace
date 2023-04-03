@@ -1,10 +1,10 @@
 .App {
-   text-align: center;
+  text-align: center;
 }
 
 .layout-wrapper {
-   margin-top: 8vh;
-   min-height: 92vh;
-   display: flex;
-   flex-direction: column;
+  margin-top: 8vh;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
 }

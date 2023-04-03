@@ -1,116 +1,116 @@
 .rank-wrapper,
 .solution-wrapper {
-   background-color: #aaa;
-   flex: 1;
+  background-color: #aaa;
+  flex: 1;
 }
 
 .rank,
 .solution-history {
-   margin: 5vh 3vw;
-   overflow-x: auto;
+  margin: 5vh 3vw;
+  overflow-x: auto;
 }
 
 .pagination-container {
-   margin: 0 auto;
-   width: 100%;
-   max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
 }
 
 table {
-   border-collapse: collapse;
-   background-color: white;
-   text-align: left;
-   padding: 0 5vw;
-   border-bottom: 20px solid #031b29;
-   margin: 0 auto;
-   width: 80%;
-   max-width: 1000px;
+  border-collapse: collapse;
+  background-color: white;
+  text-align: left;
+  padding: 0 5vw;
+  border-bottom: 20px solid #031b29;
+  margin: 0 auto;
+  width: 80%;
+  max-width: 1200px;
 }
 
 thead {
-   color: white;
+  color: white;
 }
 
 th {
-   background-color: #031b29;
-   padding: 0.75rem 2rem;
-   text-transform: uppercase;
-   letter-spacing: 0.1rem;
-   font-size: 0.7rem;
-   font-weight: 900;
-   font-size: 0.8rem;
+  background-color: #031b29;
+  padding: 0.75rem 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-size: 0.7rem;
+  font-weight: 900;
+  font-size: 0.8rem;
 }
 
 td {
-   padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .row-place {
-   width: 10%;
+  width: 10%;
 }
 
 .row-points {
-   width: 30%;
+  width: 30%;
 }
 
 tr:nth-child(even) {
-   background-color: #031b2999;
+  background-color: #031b2999;
 }
 
 tr td a {
-   text-decoration: none;
-   color: #275ef5;
+  text-decoration: none;
+  color: #275ef5;
 }
 
 tr:hover {
-   background-color: #031b2977;
+  background-color: #031b2977;
 }
 
 tr td a:hover,
 tr td a:active {
-   color: #618bff;
+  color: #618bff;
 }
 
 table tr td ul li {
-   list-style: square;
-   list-style-position: inside;
+  list-style: square;
+  list-style-position: inside;
 }
 
 @media (min-width: 350px) {
-   .pagination-container {
-      width: 90%;
-   }
+  .pagination-container {
+    width: 90%;
+  }
 }
 
 @media (min-width: 400px) {
-   .pagination-container {
-      width: 80%;
-   }
+  .pagination-container {
+    width: 80%;
+  }
 }
 
 @media (min-width: 1024px) {
-   .rank,
-   .solution-history {
-      overflow-x: inherit;
-   }
+  .rank,
+  .solution-history {
+    overflow-x: inherit;
+  }
 
-   table {
-      width: 100%;
-      box-shadow: 15px 15px 20px 5px black;
-   }
+  table {
+    width: 100%;
+    box-shadow: 15px 15px 20px 5px black;
+  }
 
-   .pagination-container {
-      width: 100%;
-   }
+  .pagination-container {
+    width: 100%;
+  }
 }
 
 @media (min-width: 1366px) {
-   table {
-      max-width: 1200px;
-      margin: 0 auto;
-   }
+  table {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
-   .pagination-container {
-      max-width: 1200px;
-   }
+  .pagination-container {
+    max-width: 1200px;
+  }
 }
