@@ -1,208 +1,208 @@
 .align-items-left {
-   text-align: left;
+  text-align: left;
 }
 
 .category-name::first-letter {
-   text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .category-name {
-   margin-bottom: 0.7rem;
+  margin-bottom: 0.7rem;
 }
 
 .tasks-introduction {
-   margin-top: 0.7rem;
+  margin-top: 0.7rem;
 }
 
 .category-tasks {
-   margin: 1rem 0;
+  margin: 1rem 0;
 }
 
 .rank-pagination,
 .solution-pagination {
-   text-align: left;
-   margin-left: auto;
-   margin-bottom: 2vh;
+  text-align: left;
+  margin-left: auto;
+  margin-bottom: 2vh;
 }
 
 .category-pagination,
 .rank-pagination,
 .solution-pagination {
-   list-style: none;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   background-color: #032538;
-   border-radius: 10px;
-   max-width: 500px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #032538;
+  border-radius: 10px;
+  max-width: 500px;
 }
 
 .category-pagination li,
 .rank-pagination li,
 .solution-pagination li {
-   flex-basis: 40px;
-   margin: 0 0.25rem;
-   cursor: pointer;
-   color: #e8ff08;
+  flex-basis: 40px;
+  margin: 0 0.25rem;
+  cursor: pointer;
+  color: #e8ff08;
 }
 
 .category-pagination li a,
 .rank-pagination li a,
 .solution-pagination li a {
-   padding: 5px 10px;
+  padding: 5px 10px;
 }
 
 .category-pagination .selected,
 .rank-pagination .selected,
 .solution-pagination .selected {
-   flex-basis: 2rem;
-   height: 2rem;
-   background-color: #e8ff08;
-   color: #032538;
-   font-weight: bold;
-   display: flex;
-   align-items: center;
-   justify-content: center;
+  flex-basis: 2rem;
+  height: 2rem;
+  background-color: #e8ff08;
+  color: #032538;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .category-pagination .previous,
 .rank-pagination .previous,
 .solution-pagination .previous {
-   flex-basis: 20%;
-   border-right: 2px solid #e8ff08;
-   margin-right: auto;
-   height: 100%;
+  flex-basis: 20%;
+  border-right: 2px solid #e8ff08;
+  margin-right: auto;
+  height: 100%;
 }
 
 .category-pagination .next,
 .rank-pagination .next,
 .solution-pagination .next {
-   flex-basis: 20%;
-   border-left: 2px solid #e8ff08;
-   margin-left: auto;
-   height: 100%;
+  flex-basis: 20%;
+  border-left: 2px solid #e8ff08;
+  margin-left: auto;
+  height: 100%;
 }
 
 .category-pagination .previous a svg,
 .rank-pagination .previous a svg,
 .solution-pagination .previous a svg {
-   padding: 0.6rem 0.8rem;
+  padding: 0.6rem 0.8rem;
 }
 
 .category-pagination .next a svg,
 .rank-pagination .next a svg,
 .solution-pagination .next a svg {
-   padding: 0.6rem 0.8rem;
+  padding: 0.6rem 0.8rem;
 }
 
 .task {
-   display: flex;
-   justify-content: space-between;
-   margin: 1rem 0;
-   min-height: 90px;
-   background-color: #032538;
-   border-radius: 10px;
-   cursor: pointer;
-   transition: 0.5s;
-   text-decoration: none;
-   color: black;
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+  min-height: 90px;
+  background-color: #032538;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+  text-decoration: none;
+  color: black;
 }
 
 .task:hover,
 .task:active {
-   background-color: rgba(3, 37, 56, 0.85);
+  background-color: rgba(3, 37, 56, 0.85);
 }
 
 .task__name {
-   margin: 0 auto 0 0.5rem;
-   font-weight: bold;
-   font-family: monospace;
-   font-size: 1.2rem;
-   color: #e8ff08;
-   display: flex;
-   flex-grow: 1;
-   padding-top: 0.4rem;
+  margin: 0 auto 0 0.5rem;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 1.2rem;
+  color: #e8ff08;
+  display: flex;
+  flex-grow: 1;
+  padding-top: 0.4rem;
 }
 
 .task__difficulty {
-   writing-mode: vertical-rl;
-   text-orientation: mixed;
-   font-weight: bold;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-weight: bold;
 }
 
 .task__difficulty--easy {
-   background-color: rgb(27, 175, 27);
+  background-color: rgb(27, 175, 27);
 }
 
 .task__difficulty--medium {
-   background-color: #ffc107;
+  background-color: #ffc107;
 }
 
 .task__difficulty--hard {
-   background-color: #dc3545;
+  background-color: #dc3545;
 }
 
 .task__done {
-   font-size: 1.6rem;
-   margin: auto 0.8rem;
-   color: rgb(85, 235, 65);
-   align-items: center;
+  font-size: 1.6rem;
+  margin: auto 0.8rem;
+  color: rgb(85, 235, 65);
+  align-items: center;
 }
 
 @media (min-width: 568px) {
-   .category-pagination,
-   .rank-pagination,
-   .solution-pagination {
-      font-size: 1.5rem;
-      height: 40px;
-   }
+  .category-pagination,
+  .rank-pagination,
+  .solution-pagination {
+    font-size: 1.5rem;
+    height: 40px;
+  }
 
-   .category-pagination .selected,
-   .rank-pagination .selected,
-   .solution-pagination .selected {
-      flex-basis: 2.5rem;
-   }
+  .category-pagination .selected,
+  .rank-pagination .selected,
+  .solution-pagination .selected {
+    flex-basis: 2.5rem;
+  }
 
-   .task__name {
-      margin: 0.8rem auto 0 0.8rem;
-      padding-top: 0;
-   }
+  .task__name {
+    margin: 0.8rem auto 0 0.8rem;
+    padding-top: 0;
+  }
 
-   .task__done {
-      margin-right: 1rem;
-      font-size: 1.8rem;
-   }
+  .task__done {
+    margin-right: 1rem;
+    font-size: 1.8rem;
+  }
 
-   .task__difficulty {
-      padding: 0 0.5rem;
-   }
+  .task__difficulty {
+    padding: 0 0.5rem;
+  }
 
-   .category-pagination .next,
-   .category-pagination .previous,
-   .rank-pagination .next,
-   .rank-pagination .previous,
-   .solution-pagination .next,
-   .solution-pagination .previous {
-      flex-basis: 5rem;
-   }
+  .category-pagination .next,
+  .category-pagination .previous,
+  .rank-pagination .next,
+  .rank-pagination .previous,
+  .solution-pagination .next,
+  .solution-pagination .previous {
+    flex-basis: 5rem;
+  }
 }
 
 @media (min-width: 768px) {
-   .task__difficulty {
-      padding: 0.2rem 0.6rem;
-      font-size: 1.2rem;
-   }
+  .task__difficulty {
+    padding: 0.2rem 0.6rem;
+    font-size: 1.2rem;
+  }
 
-   hr {
-      height: 5px;
-      background-color: black;
-   }
+  hr {
+    height: 5px;
+    background-color: black;
+  }
 
-   .task__name {
-      font-size: 1.4rem;
-   }
+  .task__name {
+    font-size: 1.4rem;
+  }
 
-   .task__done {
-      font-size: 2rem;
-   }
+  .task__done {
+    font-size: 2rem;
+  }
 }

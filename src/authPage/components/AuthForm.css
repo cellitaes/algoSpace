@@ -1,97 +1,97 @@
 .auth-form {
-   z-index: 2;
-   background-color: rgba(0, 0, 0, 0.2);
-   width: 100%;
-   height: 92vh;
-   display: flex;
-   flex-direction: column;
-   margin-top: 4vh;
-   justify-content: center;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 92vh;
+  display: flex;
+  flex-direction: column;
+  margin-top: 4vh;
+  justify-content: center;
 }
 
 .auth-form h1 {
-   text-align: center;
-   color: #e8ff08;
+  text-align: center;
+  color: #e8ff08;
 }
 
 .form-field--center {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   width: 70%;
-   margin: 0 auto;
-   padding: 0.2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70%;
+  margin: 0 auto;
+  padding: 0.2rem 0;
 }
 
 .eventForm h1 {
-   text-align: center;
-   margin-bottom: 1rem;
-   color: #e8ff08;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #e8ff08;
 }
 
 .form-field--center label {
-   font-weight: bold;
-   padding: 0.5rem;
+  font-weight: bold;
+  padding: 0.5rem;
 }
 
 .form-field--center input {
-   border-radius: 5px;
-   padding: 0.3rem;
-   font-size: 1.1rem;
+  border-radius: 5px;
+  padding: 0.3rem;
+  font-size: 1.1rem;
 }
 
 .form-field--center input:focus {
-   outline: none;
-   background: #ebebeb;
-   border-color: #e8ff08;
-   box-shadow: 0 0 6px #e8ff08;
-   border-width: 2px;
+  outline: none;
+  background: #ebebeb;
+  border-color: #e8ff08;
+  box-shadow: 0 0 6px #e8ff08;
+  border-width: 2px;
 }
 
 .form-field--center input.error {
-   border-color: red;
-   background: #ffd1d1;
+  border-color: red;
+  background: #ffd1d1;
 }
 
 div.error {
-   text-align: center;
-   color: red;
+  text-align: center;
+  color: red;
 }
 
 .eventForm__button--spacing {
-   margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .eventForm__button {
-   text-align: center;
+  text-align: center;
 }
 
 .question {
-   color: white;
-   padding: 0.6rem 0.3rem;
+  color: white;
+  padding: 0.6rem 0.3rem;
 }
 
 .question-navlink {
-   color: #e8ff08;
+  color: #e8ff08;
 
-   text-decoration: none;
-   letter-spacing: 1px;
+  text-decoration: none;
+  letter-spacing: 1px;
 }
 
 @media (min-width: 768px) {
-   .form-field--center {
-      width: 40%;
-   }
+  .form-field--center {
+    width: 40%;
+  }
 }
 
 @media (min-width: 1024px) {
-   .form-field--center {
-      padding: 0.5rem 0;
-   }
+  .form-field--center {
+    padding: 0.5rem 0;
+  }
 }
 
 @media (min-width: 1336px) {
-   .form-field--center {
-      width: 30%;
-   }
+  .form-field--center {
+    width: 30%;
+  }
 }

@@ -1,59 +1,59 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
 
 * {
-   box-sizing: border-box;
-   padding: 0;
-   margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 html {
-   font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 body {
-   margin: 0;
+  margin: 0;
 }
 
 .slide-in-left-enter {
-   transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 
 .slide-in-left-enter-active {
-   transform: translateX(0);
-   opacity: 1;
-   transition: all 200ms;
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 200ms;
 }
 
 .slide-in-left-exit {
-   transform: translateX(0%);
-   opacity: 1;
+  transform: translateX(0%);
+  opacity: 1;
 }
 
 .slide-in-left-exit-active {
-   transform: translateX(-100%);
-   opacity: 0;
-   transition: all 200ms;
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: all 200ms;
 }
 
 .center {
-   text-align: center;
-   display: flex;
-   justify-content: center;
-   align-items: center;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .center--column {
-   text-align: center;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   flex-direction: column;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .margin-around--small {
-   margin: 1.2rem;
+  margin: 1.2rem;
 }
 
 .margin-around--medium {
-   margin: 2rem;
+  margin: 2rem;
 }

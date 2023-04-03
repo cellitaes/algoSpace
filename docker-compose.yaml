@@ -1,12 +1,68 @@
-version: '1'
+version: "3"
 services:
-   frontend:
-      build: .
-      ports:
-         - '3000:3000'
-      stdin_open: true
-      tty: true
-      restart: always
-      volumes:
-         - './src:/app/src'
-         - '/app/node_modules'
+  algo-space-backend:
+    container_name: algo-space-backend
+    image: algospacezpi/algospace-backend
+    ports:
+      - "8080:8080"
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_PORT: 3306
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: pass
+      MYSQL_DATABASE: algo_space
+      # to run on Windows enable | Expose daemon on tcp://localhost:2375 without TLS | option in docker desktop
+      # check docker host using ipconfig command in cmd
+      # set docker host to DockerNAT IPv4Address and add port 2375
+      # Uncomment for Linux
+      # DOCKER_HOST: tcp://172.17.0.1:2375
+      # Uncomment for Windows
+      DOCKER_HOST: tcp://host.docker.internal:2375
+      # name of network should be preceded by the name of the folder where the docker-compose.yaml file is located and an underscore
+      DOCKER_NETWORK: algoSpace_algo-space-network
+      WORKER_IMAGE: algospacezpi/algospace-worker
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    restart: always
+    links:
+      - mysqldb
+      - redis
+    networks:
+      - algo-space-network
+
+  mysqldb:
+    image: mysql:8.0.30
+    container_name: mysql-algo-space
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: algo_space
+    networks:
+      - algo-space-network
+
+  algo-space-frontend:
+    build: .
+    container_name: algo-space-frontend
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    restart: always
+    volumes:
+      - "./src:/app/src"
+      - "/app/node_modules"
+    networks:
+      - algo-space-network
+
+  redis:
+    image: redis:6.2
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - algo-space-network
+
+networks:
+  algo-space-network:
+    driver: bridge

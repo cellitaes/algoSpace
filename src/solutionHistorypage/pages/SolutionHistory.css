@@ -1,3 +1,9 @@
 .row-show-solution button {
-   margin: 0;
+  margin: 0;
+}
+
+.solution-history__no-solutions {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
 }

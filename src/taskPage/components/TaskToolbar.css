@@ -1,86 +1,86 @@
 .toolbar {
-   background-color: #032538;
-   padding: 0.8rem 1rem;
+  background-color: #032538;
+  padding: 0.8rem 1rem;
 }
 
 .display-none {
-   display: none;
+  display: none;
 }
 
 .select-language {
-   margin: 0.5rem 0;
+  margin: 0.5rem 0;
 }
 
 .toolbar__title {
-   color: white;
-   font-weight: bold;
-   margin-bottom: 0.5rem;
-   font-size: 1.2rem;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
 }
 
 .toolbar__button button {
-   font-size: 0.7rem;
+  font-size: 0.7rem;
 }
 
 .toolbar__tabs {
-   padding: 0.5rem 0.2rem;
-   display: flex;
-   justify-content: space-between;
+  padding: 0.5rem 0.2rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .toolbar__tabs button {
-   flex-basis: 48%;
-   font-weight: bold;
+  flex-basis: 48%;
+  font-weight: bold;
 }
 
 .toolbar__button--txtAlignRight {
-   text-align: right;
+  text-align: right;
 }
 
 .toolbar__options {
-   display: flex;
-   justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .solution-icon {
-   text-align: center;
-   font-size: 100px;
+  text-align: center;
+  font-size: 100px;
 }
 
 .solution-icon--success-color {
-   color: #28a745;
+  color: #28a745;
 }
 
 .solution-icon--danger-color {
-   color: #dc3545;
+  color: #dc3545;
 }
 
 @media (min-width: 768px) {
-   .toolbar__tabs {
-      justify-content: right;
-   }
+  .toolbar__tabs {
+    justify-content: right;
+  }
 
-   .toolbar__tabs button {
-      flex-basis: 30%;
-      margin-left: 1rem;
-   }
+  .toolbar__tabs button {
+    flex-basis: 30%;
+    margin-left: 1rem;
+  }
 
-   .toolbar__title {
-      font-size: 2rem;
-      margin: 0.5rem 0 1rem;
-   }
+  .toolbar__title {
+    font-size: 2rem;
+    margin: 0.5rem 0 1rem;
+  }
 
-   .select-language {
-      margin-right: auto;
-   }
+  .select-language {
+    margin-right: auto;
+  }
 
-   .toolbar__select {
-      width: 50%;
-   }
+  .toolbar__select {
+    width: 50%;
+  }
 }
 
 @media (min-width: 1024px) {
-   .toolbar__tabs {
-      display: none;
-   }
+  .toolbar__tabs {
+    display: none;
+  }
 }
